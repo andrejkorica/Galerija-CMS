@@ -25,7 +25,7 @@ class CardFlip extends React.Component {
 					<div className="image">
 						<img
 							alt="dog"
-							style={{ width: 500, height: 500 }}
+							style={{ width: 300, height: 'auto' }}
 							onClick={this.handleClick}
 							src="https://www.svgrepo.com/show/327388/logo-react.svg"
 						/>
@@ -34,7 +34,7 @@ class CardFlip extends React.Component {
 				<div className="back">
 					<div className="noimage">
 						<img
-							style={{ width: 500, height: 500 }}
+							style={{ width: 300, height: 'auto' }}
 							alt="dog"
 							onClick={this.handleClick}
 							src="https://mui.com/static/logo.png"

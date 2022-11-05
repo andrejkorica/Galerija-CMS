@@ -1,7 +1,7 @@
 {
     "photos" : [
     {
-      "src": "https://picsum.photos/500/500",
+      "src": "https://picsum.photos/300/300",
       "id": 1,
       "Name": "monaliza",
       "Description":"Ovo je monaliza",
@@ -10,7 +10,7 @@
       "BeaconID":"Serijski broj string"
     },
     {
-      "src": "https://picsum.photos/500/500",
+      "src": "https://picsum.photos/300/300",
       "id": 2,
       "Name": "idk",
       "Description":"Ovo je idk",
@@ -19,7 +19,7 @@
       "BeaconID":"Serijski broj string2"
     },
     {
-        "src": "https://picsum.photos/500/500",
+        "src": "https://picsum.photos/300/300",
         "id": 3,
         "Name": "idkkkk",
         "Description":"Ovo je idkkkk",
@@ -28,7 +28,7 @@
         "BeaconID":"Serijski broj string3"
       },
       {
-        "src": "https://picsum.photos/500/500",
+        "src": "https://picsum.photos/300/300",
         "id": 4,
         "Name": "idsfsddk",
         "Description":"Ovo je sdfsidk",
@@ -37,7 +37,7 @@
         "BeaconID":"Serijski broj string4"
       },
       {
-        "src": "https://picsum.photos/500/500",
+        "src": "https://picsum.photos/300/300",
         "id": 5,
         "Name": "Vedran",
         "Description":"Ovo je vedran",
