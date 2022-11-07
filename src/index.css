@@ -13,8 +13,8 @@ code {
 }
 
 .imageGallery {
-  max-width: auto;
-  min-height: 550px;
+  width: 600px;
+  height: 500px;
 }
 
 
