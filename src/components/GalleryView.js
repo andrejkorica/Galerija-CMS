@@ -11,6 +11,7 @@ const GalleryView = ({ podaci }) => {
 	const [poredak, setPoredak] = useState(4);
 
 	const [open, setOpen] = useState(false);
+	const [slika, setSlika] = useState([]);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
@@ -35,7 +36,10 @@ const GalleryView = ({ podaci }) => {
 
 							<img
 								className="imageGallery"
-								onClick={handleOpen}
+								onClick={() => {
+									handleOpen();
+									setSlika(person);
+								}}
 								src={person.src}
 								alt="IMG DIDNT LOAD"
 							/>
@@ -58,7 +62,7 @@ const GalleryView = ({ podaci }) => {
 						Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
 					</Typography>
 					<div display="flex" align="center">
-						<CardFlip />
+						<CardFlip podaci={slika} />
 					</div>
 				</Box>
 			</Modal>

@@ -12,8 +12,6 @@ const Home = () => {
 	const [poredak, setPoredak] = useState(4);
 	const [postavi, setPostavi] = useState(true);
 
-	const [open, setOpen] = useState(false);
-
 	const getData = async () => {
 		const podaci = await axios.get(`http://localhost:8000/photos`);
 		setPodaci(podaci.data);

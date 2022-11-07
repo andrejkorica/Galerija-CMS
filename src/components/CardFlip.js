@@ -1,49 +1,31 @@
 import ReactCardFlip from "react-card-flip";
-import React from "react";
+import { useState } from "react";
 
-class CardFlip extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			isFlipped: false,
-		};
-		this.handleClick = this.handleClick.bind(this);
-	}
+const CardFlip = ({ podaci }) => {
+	const [isFlipped, setisFlipped] = useState(true);
+	console.log(podaci);
 
-	handleClick(e) {
-		e.preventDefault();
-		this.setState((prevState) => ({ isFlipped: !prevState.isFlipped }));
-	}
-
-	render() {
-		return (
-			<ReactCardFlip
-				isFlipped={this.state.isFlipped}
-				flipDirection="horizontal"
-			>
-				<div className="front">
-					<div className="image">
-						<img
-							alt="dog"
-							style={{ width: 300, height: 'auto' }}
-							onClick={this.handleClick}
-							src="https://www.svgrepo.com/show/327388/logo-react.svg"
-						/>
-					</div>
+	return (
+		<ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+			<div className="front">
+				<div className="image">
+					<p>Author: {podaci.Author}</p>
+					<p>Naziv slike: {podaci.Name}</p>
+					<p>Description: {podaci.Description}</p>
 				</div>
-				<div className="back">
-					<div className="noimage">
-						<img
-							style={{ width: 300, height: 'auto' }}
-							alt="dog"
-							onClick={this.handleClick}
-							src="https://mui.com/static/logo.png"
-						/>
-					</div>
+			</div>
+			<div className="back">
+				<div className="noimage">
+					<img
+						style={{ width: 300, height: "auto" }}
+						alt="dog"
+						onClick={() => setisFlipped(!isFlipped)}
+						src={podaci.src}
+					/>
 				</div>
-			</ReactCardFlip>
-		);
-	}
-}
+			</div>
+		</ReactCardFlip>
+	);
+};
 
 export default CardFlip;

@@ -42,9 +42,9 @@ const OneRow = ({ podaci }) => {
 						</Box>
 					</Grid>
 					<Grid key={person.id} lg={6} md={6} item>
-						<p>Autor: Dean</p>
-						<p>Naziv slike: Golf sa prijateljima</p>
-						<p>Description: U ovoj slici prijatelji sa posla igraju golf.</p>
+						<p>Author: {person.Author}</p>
+						<p>Naziv slike: {person.Name}</p>
+						<p>Description: {person.Description}</p>
 					</Grid>
 				</Grid>
 			))}
@@ -63,7 +63,7 @@ const OneRow = ({ podaci }) => {
 						Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
 					</Typography>
 					<div display="flex" align="center">
-						<CardFlip />
+						<CardFlip podaci={podaci} />
 					</div>
 				</Box>
 			</Modal>
