@@ -1,7 +1,7 @@
 {
     "photos" : [
     {
-      "src": "https://picsum.photos/300/300",
+      "src": "https://picsum.photos/500/300",
       "id": 1,
       "Name": "monaliza",
       "Description":"Ovo je monaliza",
@@ -10,7 +10,7 @@
       "BeaconID":"Serijski broj string"
     },
     {
-      "src": "https://picsum.photos/300/300",
+      "src": "https://picsum.photos/300/600",
       "id": 2,
       "Name": "idk",
       "Description":"Ovo je idk",
