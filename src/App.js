@@ -1,9 +1,23 @@
-import Home from "./Home";
+
 import "./App.css";
 
 function App() {
 	return (
-		<div>
+		<div >
+	
+			
+		
+		<div className="slice">
+			
+		<button className="viewTipka glowOnHoverView ripple">
+				Gallery view
+			</button>
+			
+			<button className="dodajTipka glowOnHoverAdd ripple">
+				Add new image
+			</button>
+		
+		</div>
 			<div className="container">
 				<div>
 					<img src="https://picsum.photos/1920/1080" alt="1" />
