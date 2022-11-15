@@ -5,25 +5,12 @@ import { useState, useEffect } from "react";
 function App() {
 	const [podaci, setPodaci] = useState([]);
 	const [brojac, setBrojac] = useState(0);
-	const [x, setX] = useState(5);
-	const [y, setY] = useState(10);
+	const x = 5;
+	const y = 10;
 	const getData = async () => {
 		const podaci = await axios.get(`http://localhost:8000/photos`);
 		setPodaci(podaci.data);
 		console.log(podaci.data.length);
-	};
-	const setXY = () => {
-		console.log("setxy");
-		setX(x + 5);
-		if (brojac > 1) setY(y + 5);
-	};
-	const getVal = (i) => {
-		console.log("i", i);
-		return true;
-	};
-	const getLastDigit = (i) => {
-		var lenI = String(i).length;
-		return Number(String(i).charAt(lenI - 1));
 	};
 	useEffect(() => {
 		if (podaci) setBrojac(Math.round(podaci.length / 5));
