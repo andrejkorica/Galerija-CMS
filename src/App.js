@@ -2,9 +2,11 @@ import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import GalleryV from "./components/GalleryV";
+import OneRow from "./components/OneRow";
 
 function App() {
 	const [podaci, setPodaci] = useState([]);
+	const [view, setView] = useState(true);
 	const getData = async () => {
 		const podaci = await axios.get(`http://localhost:8000/photos`);
 		setPodaci(podaci.data);
@@ -16,15 +18,20 @@ function App() {
 	return (
 		<div>
 			<div className="slice">
-				<button className="viewTipka glowOnHoverView ripple">
-					Gallery view
+				<button
+					onClick={() => setView(!view)}
+					className="viewTipka glowOnHoverView ripple"
+				>
+					{view && "Gallery View"}
+					{!view && "Inline View"}
 				</button>
 
 				<button className="dodajTipka glowOnHoverAdd ripple">
 					Add new image
 				</button>
 			</div>
-			{podaci && <GalleryV podaci={podaci}></GalleryV>}
+			{view && podaci && <GalleryV podaci={podaci}></GalleryV>}
+			{!view && podaci && <OneRow podaci={podaci}></OneRow>}
 		</div>
 	);
 }

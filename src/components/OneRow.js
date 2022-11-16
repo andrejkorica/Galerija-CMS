@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as React from "react";
 import CardFlip from "./CardFlip";
 import Box from "@mui/material/Box";
@@ -8,8 +8,7 @@ import Grid from "@mui/material/Grid";
 import "../index.css";
 
 const OneRow = ({ podaci }) => {
-	const [poredak, setPoredak] = useState(6);
-
+	const [slika, setSlika] = useState([]);
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -29,13 +28,16 @@ const OneRow = ({ podaci }) => {
 		<div>
 			{podaci.map((person) => (
 				<Grid container spacing={1}>
-					<Grid key={person.id} lg={6} md={6} item>
+					<Grid key={person.id + 1} lg={6} md={6} item>
 						<Box display="flex" flexDirection="column" alignItems="center">
 							<p>{person.Name}</p>
 
 							<img
 								className="imageGallery"
-								onClick={handleOpen}
+								onClick={() => {
+									handleOpen();
+									setSlika(person);
+								}}
 								src={person.src}
 								alt="IMG DIDNT LOAD"
 							/>
@@ -48,7 +50,6 @@ const OneRow = ({ podaci }) => {
 					</Grid>
 				</Grid>
 			))}
-
 			<Modal
 				open={open}
 				onClose={handleClose}
@@ -63,7 +64,7 @@ const OneRow = ({ podaci }) => {
 						Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
 					</Typography>
 					<div display="flex" align="center">
-						<CardFlip podaci={podaci} />
+						<CardFlip podaci={slika} />
 					</div>
 				</Box>
 			</Modal>

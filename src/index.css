@@ -13,9 +13,10 @@ code {
 }
 
 .imageGallery {
-  width: 300px;
-  height: 300px;
+  width: 600px;
+  height: 600px;
   object-fit: cover;
+  border-radius: 2px;
 }
 
 

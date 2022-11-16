@@ -18,7 +18,7 @@ const CardFlip = ({ podaci }) => {
 				<div className="noimage">
 					<img
 						style={{ height: "600px" }}
-						alt="dog"
+						alt="pic"
 						onClick={() => setisFlipped(!isFlipped)}
 						src={podaci.src}
 					/>
