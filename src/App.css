@@ -63,7 +63,7 @@
 .containerflip div:nth-child(1) {
   grid-column: 1;     
 }
-.containerflip div:nth-child(3){
+.containerflip div:nth-child(5){
   
   grid-column: 3 / 5 ; 
   grid-row: 1 / 3;    
