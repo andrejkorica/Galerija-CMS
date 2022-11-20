@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import * as React from "react";
 import CardFlip from "./CardFlip";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Grid from "@mui/material/Grid";
-import "../index.css";
+import "../App.css";
 
 const OneRow = ({ podaci }) => {
 	const [slika, setSlika] = useState([]);
@@ -25,30 +25,50 @@ const OneRow = ({ podaci }) => {
 		p: 4,
 	};
 	return (
-		<div>
-			{podaci.map((person) => (
-				<Grid container spacing={1}>
-					<Grid key={person.id + 1} lg={6} md={6} item>
-						<Box display="flex" flexDirection="column" alignItems="center">
-							<p>{person.Name}</p>
+		<div style={{margin: "8px"} }>
+			{podaci.map((data) => (		
 
+				<Grid container spacing={1} justifyContent={"center"}>
+					<Grid key={data.id + 1} lg={4} md={6} item  >
+						<Box display="flex" flexDirection="column" alignItems="center" >
+							
 							<img
 								className="imageGallery"
 								onClick={() => {
 									handleOpen();
-									setSlika(person);
+									setSlika(data);
 								}}
-								src={person.src}
+								src={data.src}
 								alt="IMG DIDNT LOAD"
+								style={{marginBottom: '8px'}}
 							/>
+						
 						</Box>
 					</Grid>
-					<Grid key={person.id} lg={6} md={6} item>
-						<p>Author: {person.Author}</p>
-						<p>Naziv slike: {person.Name}</p>
-						<p>Description: {person.Description}</p>
+					
+					<Grid key={data.id} lg={4} md={6} item  >
+					<div  className="gradiantContainer">
+						<div className="containName">
+						{data.Name}
+						</div>
+						Author:
+						<div className="contain">
+						<p> {data.Author}</p>
+						</div>
+						Naziv slike:
+						<div className="contain">
+						<p> {data.Name}</p>
+						</div>
+						Description:
+						<div className="contain">
+							
+						<p> {data.Description}</p>
+						</div>
+						</div>
 					</Grid>
+					
 				</Grid>
+				
 			))}
 			<Modal
 				open={open}

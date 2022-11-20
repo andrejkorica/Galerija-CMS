@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 import "../index.css";
 
 const GalleryView = ({ podaci }) => {
-	const [poredak, setPoredak] = useState(3);
+
 
 	const [open, setOpen] = useState(false);
 	const [slika, setSlika] = useState([]);
@@ -29,18 +29,18 @@ const GalleryView = ({ podaci }) => {
 	return (
 		<div>
 			<Grid container spacing={1}>
-				{podaci.map((person) => (
-					<Grid key={person.id} lg={2} md={2} alignItems="stretch" item>
+				{podaci.map((image) => (
+					<Grid key={image.id} lg={2} md={2} alignItems="stretch" item>
 						<Box display="flex" flexDirection="column" alignItems="center">
-							<p>{person.Name}</p>
+							<p>{image.Name}</p>
 
 							<img
 								className="imageGallery"
 								onClick={() => {
 									handleOpen();
-									setSlika(person);
+									setSlika(image);
 								}}
-								src={person.src}
+								src={image.src}
 								alt="IMG DIDNT LOAD"
 							/>
 						</Box>

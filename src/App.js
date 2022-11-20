@@ -22,8 +22,8 @@ function App() {
 					onClick={() => setView(!view)}
 					className="viewTipka glowOnHoverView ripple"
 				>
-					{view && "Gallery View"}
-					{!view && "Inline View"}
+					{view && "Gallery view"}
+					{!view && "Inline view"}
 				</button>
 
 				<button className="dodajTipka glowOnHoverAdd ripple">

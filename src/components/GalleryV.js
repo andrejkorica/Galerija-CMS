@@ -4,7 +4,7 @@ import CardFlip from "./CardFlip";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import "../index.css";
+import "../App.css";
 const GalleryV = ({ podaci }) => {
 	const [open, setOpen] = useState(false);
 	const [slika, setSlika] = useState([]);
