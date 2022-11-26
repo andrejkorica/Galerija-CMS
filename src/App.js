@@ -3,6 +3,9 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import GalleryV from "./components/GalleryV";
 import OneRow from "./components/OneRow";
+import TocIcon from '@mui/icons-material/Toc';
+import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
+import AddIcon from '@mui/icons-material/Add';
 
 function App() {
 	const [podaci, setPodaci] = useState([]);
@@ -18,17 +21,19 @@ function App() {
 	return (
 		<div>
 			<div className="slice">
+				<div className="alignTipka2">
 				<button
 					onClick={() => setView(!view)}
 					className="viewTipka glowOnHoverView ripple"
 				>
-					{view && "Gallery view"}
-					{!view && "Inline view"}
+					{view && <TocIcon fontSize="large" className="img1size"  />}
+					{!view && <ViewQuiltIcon className="img2size" fontSize="large"  />}
 				</button>
 
 				<button className="dodajTipka glowOnHoverAdd ripple">
-					Add new image
+				<AddIcon fontSize="large" className="img1size"  />
 				</button>
+				</div>
 			</div>
 			{view && podaci && <GalleryV podaci={podaci}></GalleryV>}
 			{!view && podaci && <OneRow podaci={podaci}></OneRow>}
