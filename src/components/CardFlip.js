@@ -9,9 +9,18 @@ const CardFlip = ({ podaci }) => {
 		<ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
 			<div className="front">
 				<div className="image">
-					<p>Author: {podaci.Author}</p>
-					<p>Naziv slike: {podaci.Name}</p>
-					<p>Description: {podaci.Description}</p>
+				<div className="positionFlip" >``
+					
+            <div className="contain">
+              <p>Author: {podaci.Author}</p>
+            </div>
+            <div className="contain">
+              <p>Naziv slike: {podaci.Name}</p>
+            </div>
+            <div className="contain">
+              <p>Description: {podaci.Description}</p>
+            </div>
+          </div>
 				</div>
 			</div>
 			<div className="back">

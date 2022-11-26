@@ -136,18 +136,20 @@ body{
   display: flex;
   background: white;
   width: 40%;
-  margin: 1rem auto;
+  height: 100%;
+  margin: auto auto;
   height: 3rem;
   border-radius: 2rem;
   justify-content: center;
   align-items: center;
+   
   
   
 }
 
 .gridInlineFather {
   display: grid;
-  grid: 304px 304px / repeat(2, 608px);
+  grid: 290px 304px / repeat(2, 608px);
   justify-content: center;
   grid-gap: 8px;
   margin-top: 8px;
@@ -166,6 +168,36 @@ background: linear-gradient(to left,#00000080, #00000060,#00000050,#00000030, #0
 .img2size{
   vertical-align:middle;
 }
+
+.modalBody {
+  position: absolute;
+  height: 45rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 60%;
+  background-color: #181818;
+  box-shadow: 24;
+  padding: 3rem;
+  border: none;
+  
+}
+
+.positionFlip{
+  display: flex;
+  flex-direction: column;
+  height: 15rem;
+  
+}
+
+.naslovAlign{
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+
+
 
 
 
