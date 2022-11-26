@@ -200,5 +200,69 @@ background: linear-gradient(to left,#00000080, #00000060,#00000050,#00000030, #0
 
 
 
+.modal {
+    font-size: 12px;
+  }
+.modal > .header {
+    width: 100%;
+    border-bottom: 1px solid gray;
+    font-size: 18px;
+    text-align: center;
+    padding: 5px;
+  }
+.modal > .content {
+    width: 100%;
+    padding: 10px 5px;
+  }
+.modal > .actions {
+    width: 100%;
+    padding: 10px 5px;
+    margin: auto;
+    text-align: center;
+  }
+.modal > .close {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: -10px;
+    top: -10px;
+    font-size: 24px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #cfcece;
+  }
 
+
+input {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: rgb(0, 0, 0);
+				letter-spacing: 0.15em;
+				display: inline-block;
+				padding: 15px 20px;
+				position: relative;
+        border:0;
+        width:calc(100%-2px)
+			}
+input:focus {
+				outline: none;
+			}
+
+textarea:focus {
+				border: 0;
+				outline: 0;
+			}
+textarea {
+  font-family: 'Noto Sans JP', sans-serif;
+  text-decoration: none;
+				letter-spacing: 0.15em;
+				display: inline-block;
+				padding: 15px 20px;
+				position: relative;
+				border-bottom: #baada7;
+				border: 2px;
+				outline: none !important;
+        width:93%
+			}
 
