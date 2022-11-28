@@ -8,6 +8,17 @@ import ViewQuiltIcon from "@mui/icons-material/ViewQuilt";
 import AddIcon from "@mui/icons-material/Add";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+import DragnDrop from "./components/DragnDrop";
+import React from "react";
+import Uploady from "@rpldy/uploady";
+import UploadButton from "@rpldy/upload-button";
+import UploadPreview from "@rpldy/upload-preview";
+import UploadDropZone from "@rpldy/upload-drop-zone";
+
+const filterBySize = (file) => {
+	//filter out images larger than 5MB
+	return file.size <= 5242880;
+};
 
 function App() {
 	const [podaci, setPodaci] = useState([]);
@@ -15,6 +26,12 @@ function App() {
 	const getData = async () => {
 		const podaci = await axios.get(`http://localhost:8000/photos`);
 		setPodaci(podaci.data);
+	};
+	const handleSubmit = (event) => {
+		// 👇️ prevent page refresh
+		event.preventDefault();
+
+		console.log("form submitted ✅");
 	};
 
 	useEffect(() => {
@@ -48,7 +65,7 @@ function App() {
 								<div className="header">Insert new picture</div>
 								<div className="content">
 									{""}
-									<form action="">
+									<form onSubmit={handleSubmit}>
 										<input
 											type="text"
 											name="ip"
@@ -85,6 +102,17 @@ function App() {
 											placeholder="Beacon ID...."
 										/>
 										<hr />
+										<Uploady destination={""}>
+											<UploadDropZone
+												onDragOverClassName="drag-over"
+												grouped
+												maxGroupSize={3}
+											>
+												<span>Drag&Drop File(s) Here</span>
+											</UploadDropZone>
+											<UploadButton>Upload</UploadButton>
+											<UploadPreview />
+										</Uploady>
 									</form>
 								</div>
 								<div className="actions">
