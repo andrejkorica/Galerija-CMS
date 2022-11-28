@@ -23,6 +23,9 @@ const filterBySize = (file) => {
 function App() {
 	const [podaci, setPodaci] = useState([]);
 	const [view, setView] = useState(true);
+	const [selectedFile, setSelectedFile] = useState();
+	const [isFilePicked, setIsFilePicked] = useState(false);
+
 	const getData = async () => {
 		const podaci = await axios.get(`http://localhost:8000/photos`);
 		setPodaci(podaci.data);
@@ -33,6 +36,28 @@ function App() {
 
 		console.log("form submitted ✅");
 	};
+
+	const getBase64 = (file) => {
+		return new Promise((resolve, reject) => {
+			console.log("getbase64");
+			const reader = new FileReader();
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = (error) => reject(error);
+			reader.readAsDataURL(file);
+		});
+	};
+
+	const changeHandler = (e) => {
+		setSelectedFile(e.target.files[0]);
+		setIsFilePicked(true);
+		const file = e.target.files[0];
+		getBase64(file).then((base64) => {
+			localStorage["fileBase64"] = base64;
+			console.log("file stored", base64);
+		});
+	};
+
+	const handleSubmission = () => {};
 
 	useEffect(() => {
 		getData();
@@ -102,17 +127,24 @@ function App() {
 											placeholder="Beacon ID...."
 										/>
 										<hr />
-										<Uploady destination={""}>
-											<UploadDropZone
-												onDragOverClassName="drag-over"
-												grouped
-												maxGroupSize={3}
-											>
-												<span>Drag&Drop File(s) Here</span>
-											</UploadDropZone>
-											<UploadButton>Upload</UploadButton>
-											<UploadPreview />
-										</Uploady>
+
+										<input type="file" name="file" onChange={changeHandler} />
+										{isFilePicked ? (
+											<div>
+												<p>Filename: {selectedFile.name}</p>
+												<p>Filetype: {selectedFile.type}</p>
+												<p>Size in bytes: {selectedFile.size}</p>
+												<p>
+													lastModifiedDate:{" "}
+													{selectedFile.lastModifiedDate.toLocaleDateString()}
+												</p>
+											</div>
+										) : (
+											<p>Select a file to show details</p>
+										)}
+										<div>
+											<button onClick={handleSubmission}>Submit</button>
+										</div>
 									</form>
 								</div>
 								<div className="actions">

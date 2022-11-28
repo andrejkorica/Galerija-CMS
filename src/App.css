@@ -172,7 +172,7 @@ background: linear-gradient(to left,#00000080, #00000060,#00000050,#00000030, #0
 .modalBody {
   position: absolute;
   height: 45rem;
-  top: 50%;
+  top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 60%;
@@ -196,12 +196,9 @@ background: linear-gradient(to left,#00000080, #00000060,#00000050,#00000030, #0
   color: white;
 }
 
-
-
-
-
 .modal {
     font-size: 12px;
+   
   }
 .modal > .header {
     width: 100%;
@@ -265,4 +262,6 @@ textarea {
 				outline: none !important;
         width:93%
 			}
-
+.sizee > img {
+  max-width: 400px;
+}
