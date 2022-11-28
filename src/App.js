@@ -162,22 +162,24 @@ function App() {
 										) : (
 											<p>Select a file to show details</p>
 										)}
-										<div className="droparea">
-											<div className="container">
-												<div
-													className="drop-container"
-													onDragOver={dragOver}
-													onDragEnter={dragEnter}
-													onDragLeave={dragLeave}
-													onDrop={fileDrop}
-												>
-													<div className="drop-message">
-														<div className="upload-icon"></div>
-														Drag & Drop
+										{!isFilePicked && (
+											<div className="droparea">
+												<div className="container">
+													<div
+														className="drop-container"
+														onDragOver={dragOver}
+														onDragEnter={dragEnter}
+														onDragLeave={dragLeave}
+														onDrop={fileDrop}
+													>
+														<div className="drop-message">
+															<div className="upload-icon"></div>
+															Drag & Drop
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
+										)}
 										{!isFilePicked && (
 											<input type="file" name="file" onChange={changeHandler} />
 										)}
