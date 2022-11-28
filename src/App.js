@@ -8,23 +8,14 @@ import ViewQuiltIcon from "@mui/icons-material/ViewQuilt";
 import AddIcon from "@mui/icons-material/Add";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import DragnDrop from "./components/DragnDrop";
 import React from "react";
-import Uploady from "@rpldy/uploady";
-import UploadButton from "@rpldy/upload-button";
-import UploadPreview from "@rpldy/upload-preview";
-import UploadDropZone from "@rpldy/upload-drop-zone";
-
-const filterBySize = (file) => {
-	//filter out images larger than 5MB
-	return file.size <= 5242880;
-};
 
 function App() {
 	const [podaci, setPodaci] = useState([]);
 	const [view, setView] = useState(true);
 	const [selectedFile, setSelectedFile] = useState();
 	const [isFilePicked, setIsFilePicked] = useState(false);
+	const [preview, setPreview] = useState();
 
 	const getData = async () => {
 		const podaci = await axios.get(`http://localhost:8000/photos`);
@@ -55,6 +46,12 @@ function App() {
 			localStorage["fileBase64"] = base64;
 			console.log("file stored", base64);
 		});
+		changePreview(e.target.files[0]);
+	};
+	const changePreview = (s) => {
+		const objectUrl = URL.createObjectURL(s);
+		setPreview(objectUrl);
+		console.log(preview);
 	};
 
 	const handleSubmission = () => {};
@@ -129,8 +126,8 @@ function App() {
 										<hr />
 
 										<input type="file" name="file" onChange={changeHandler} />
-										{isFilePicked ? (
-											<div>
+										{isFilePicked && preview ? (
+											<div className="prew">
 												<p>Filename: {selectedFile.name}</p>
 												<p>Filetype: {selectedFile.type}</p>
 												<p>Size in bytes: {selectedFile.size}</p>
@@ -138,6 +135,7 @@ function App() {
 													lastModifiedDate:{" "}
 													{selectedFile.lastModifiedDate.toLocaleDateString()}
 												</p>
+												<img src={preview} alt="preview" />
 											</div>
 										) : (
 											<p>Select a file to show details</p>
