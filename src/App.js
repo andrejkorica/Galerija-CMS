@@ -56,6 +56,29 @@ function App() {
 
 	const handleSubmission = () => {};
 
+	const dragOver = (e) => {
+		e.preventDefault();
+	};
+	const dragEnter = (e) => {
+		e.preventDefault();
+	};
+
+	const dragLeave = (e) => {
+		e.preventDefault();
+	};
+	const fileDrop = (e) => {
+		e.preventDefault();
+		console.log(e.dataTransfer.files[0]);
+		setSelectedFile(e.dataTransfer.files[0]);
+		setIsFilePicked(true);
+		const file = e.dataTransfer.files[0];
+		getBase64(file).then((base64) => {
+			localStorage["fileBase64"] = base64;
+			console.log("file stored", base64);
+		});
+		changePreview(e.dataTransfer.files[0]);
+	};
+
 	useEffect(() => {
 		getData();
 	}, []);
@@ -125,7 +148,6 @@ function App() {
 										/>
 										<hr />
 
-										<input type="file" name="file" onChange={changeHandler} />
 										{isFilePicked && preview ? (
 											<div className="prew">
 												<p>Filename: {selectedFile.name}</p>
@@ -139,6 +161,25 @@ function App() {
 											</div>
 										) : (
 											<p>Select a file to show details</p>
+										)}
+										<div className="droparea">
+											<div className="container">
+												<div
+													className="drop-container"
+													onDragOver={dragOver}
+													onDragEnter={dragEnter}
+													onDragLeave={dragLeave}
+													onDrop={fileDrop}
+												>
+													<div className="drop-message">
+														<div className="upload-icon"></div>
+														Drag & Drop
+													</div>
+												</div>
+											</div>
+										</div>
+										{!isFilePicked && (
+											<input type="file" name="file" onChange={changeHandler} />
 										)}
 										<div>
 											<button onClick={handleSubmission}>Submit</button>
