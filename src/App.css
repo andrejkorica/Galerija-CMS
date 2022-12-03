@@ -67,7 +67,7 @@
   grid-row: 1 / 3;    
 }
 body{
-  background: linear-gradient(#A44E4E, #3A7683);
+  background: linear-gradient(#A44E4E, #3A7683, #3A7683, #A44E4E);
   font-family: 'Noto Sans JP', sans-serif;
 }
 
@@ -135,26 +135,52 @@ body{
 
 .containContainContain{
   display: flex;
+  position: relative;
+  top: 30%;
+  transform: translateY(-50%);
 }
 .containContain{
-  width: 400px;
+  width: 100%;
   height: 100px;
+  
+  
 }
 .contain{
   display: flex;
   background: white;
-  width: 150px;
+  width: 250px;
   margin: auto auto;
   height: 40px;
   border-radius: 2rem;
   justify-content: center;
   align-items: center;
+  margin-top: 15px;
+  
+}
+
+h1{
+  margin: 0;
+}
+
+.containName {
+
+  display: flex;
+  background-color: white;
+  width: 300px;
+  height: 60px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  border-radius: 25px;
+  
+  text-transform: uppercase;
+  
   
 }
 
 .gridInlineFather {
   display: grid;
-  grid: 145px 145px / repeat(2, 608px);
+  grid: 150px 140px / 300px 912px;
   justify-content: center;
   grid-gap: 8px;
   margin-top: 8px;
@@ -168,15 +194,15 @@ body{
 }
 
 .gridInlineChild1 {
-  width: 60%;
-  height: 400px;
+  width: 100%;
+
    
 }
 
 .gridInlineChild2 {
 height: 300px;
 text-align: center;
-background: linear-gradient(to left,#00000080, #00000060,#00000050,#00000030, #00000000);
+background: linear-gradient(to left,#00000070, #00000050,#00000040,#00000030, #00000000);
 grid-column: 2 / 3; 
 }
 
@@ -189,20 +215,23 @@ grid-column: 2 / 3;
 
 .modalBody {
   position: absolute;
-  height: 45rem;
+  height: 40rem;
   top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 60%;
   background-color: #181818;
   box-shadow: 24;
-  padding: 3rem;
+  padding: 4rem;
   border: none;
+
+  
   
 }
 
 .positionFlip{
   display: flex;
+  justify-content: center;
   flex-direction: column;
   height: 15rem;
   
@@ -212,6 +241,7 @@ grid-column: 2 / 3;
   justify-content: center;
   text-align: center;
   color: white;
+  margin-bottom: 2rem;
 }
 
 .modal {
@@ -307,4 +337,80 @@ textarea {
   color: orange;
   background-color: crimson;
   border: 1px solid crimson;
+}
+
+.naslovBijeli{
+  color: white;
+}
+
+.containLarge{
+  display: flex;
+  background: white;
+  width: 800px;
+  height: 370px;
+  border-radius: 2rem;
+  margin-top: 15px;
+  padding: 2.5rem;
+}
+
+.containDesc{
+  display: flex;
+  background: white;
+  width: 700px;
+  margin: auto auto;
+  height: 110px;
+  border-radius: 2rem;
+
+  padding-inline: 30px;
+  margin-top: 10px;
+  
+}
+
+.naslovBijeliDesc{
+  color: white;
+  margin-top: 30px;
+}
+
+.alignSlikaModal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+ 
+
+  
+}
+
+.containFlip{
+  display: flex;
+  background: white;
+  width: 250px;
+
+  height: 40px;
+  border-radius: 2rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+
+  
+}
+
+.alignCardFlip{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonFlip{
+  position: relative;
+  left: 86.5%;
+  margin-top: -5rem;
+  top: 4.5%;
+  z-index: 99999;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  padding: 0;
+border: none;
+background: white;
 }

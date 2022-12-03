@@ -49,11 +49,12 @@ const GalleryV = ({ podaci }) => {
 		disableAutoFocus={true}
       >
         <Box className="modalBody">
-          <h1 className="naslovAlign">NASLOV</h1>
-          <div display="flex" align="center">
+          <button className="buttonFlip">
+            aaaaa
+          </button>
+          <div className="alignCardFlip">
             <CardFlip podaci={slika} />
-          </div>
-
+            </div>
         </Box>
       </Modal>
     </div>

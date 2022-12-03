@@ -43,29 +43,28 @@ const OneRow = ({ podaci }) => {
           </div>
 
           <div key={data.id} className="gridInlineChild2">
-            <div className="containName">
-              <h1 className="titleCards" style={{textTransform: 'uppercase'}}> {data.Name} </h1>
-            </div>
             <div className="containContainContain">
             <div className="containContain">
-            Author:
+            <div className="naslovBijeli"> Author: </div>
             <div className="contain">
               <p> {data.Author}</p>
             </div>
             </div>
             <div className="containContain">
-            Naziv slike:
+           <div className="naslovBijeli"> Naziv slike: </div>
             <div className="contain">
               <p> {data.Name}</p>
             </div>
             </div>
-            <div className="containContain">
-            Description:
-            <div className="contain">
-              <p> {data.Description}</p>
-            </div>
-            </div>
+            
           </div>
+          <div className="containContain">
+            <div className="naslovBijeliDesc">Description: </div>
+            <div className="containDesc">
+              <p> {data.Description}</p>
+        
+            </div>
+            </div>
           </div>
         </div>
       ))}
