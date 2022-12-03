@@ -30,7 +30,7 @@ const OneRow = ({ podaci }) => {
           <div key={data.id} className="gridInlineChild1">
             <Box display="flex" flexDirection="column" alignItems="center">
               <img
-                className="imageGallery"
+                className="imageInline"
                 onClick={() => {
                   handleOpen();
                   setSlika(data);
@@ -46,18 +46,26 @@ const OneRow = ({ podaci }) => {
             <div className="containName">
               <h1 className="titleCards" style={{textTransform: 'uppercase'}}> {data.Name} </h1>
             </div>
+            <div className="containContainContain">
+            <div className="containContain">
             Author:
             <div className="contain">
               <p> {data.Author}</p>
             </div>
+            </div>
+            <div className="containContain">
             Naziv slike:
             <div className="contain">
               <p> {data.Name}</p>
             </div>
+            </div>
+            <div className="containContain">
             Description:
             <div className="contain">
               <p> {data.Description}</p>
             </div>
+            </div>
+          </div>
           </div>
         </div>
       ))}
