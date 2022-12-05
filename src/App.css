@@ -192,6 +192,14 @@ h1{
   object-fit: cover;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
+.imageInline:hover{
+  transition: all .1s ease-in-out;
+  transform: scale(0.95);
+}
+.imageInline:active{
+  transition: all .1s ease-in-out;
+  transform: scale(1);
+}
 
 .gridInlineChild1 {
   width: 100%;
@@ -402,10 +410,10 @@ textarea {
 }
 
 .buttonFlip{
-  position: relative;
-  left: 86.5%;
-  margin-top: -5rem;
-  top: 4.5%;
+  position: fixed;
+  left: 47.5%;
+
+  top: 95%;
   z-index: 99999;
   height: 4rem;
   width: 4rem;
@@ -413,4 +421,33 @@ textarea {
   padding: 0;
 border: none;
 background: white;
+}
+.buttonFlip2{
+  position: fixed;
+  left: 47.5%;
+  top: 240%;
+  z-index: 99999;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  padding: 0;
+border: none;
+background: white;
+}
+.buttonFlip2:hover{
+  transform: scale(0.90);
+  transition: all .2s ease-in-out;
+}
+.buttonFlip2:active{
+  transition: all .05s ease-in-out;
+  transform: scale(1);
+}
+
+.buttonFlip:hover{
+  transform: scale(0.90);
+  transition: all .2s ease-in-out;
+}
+.buttonFlip:active{
+  transition: all .05s ease-in-out;
+  transform: scale(1);
 }

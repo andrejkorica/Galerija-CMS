@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import * as React from "react";
 import CardFlip from "./CardFlip";
+
 import Box from "@mui/material/Box";
 
 import Modal from "@mui/material/Modal";
@@ -49,9 +50,7 @@ const GalleryV = ({ podaci }) => {
 		disableAutoFocus={true}
       >
         <Box className="modalBody">
-          <button className="buttonFlip">
-            aaaaa
-          </button>
+          
           <div className="alignCardFlip">
             <CardFlip podaci={slika} />
             </div>

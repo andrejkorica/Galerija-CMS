@@ -45,15 +45,15 @@ const OneRow = ({ podaci }) => {
           <div key={data.id} className="gridInlineChild2">
             <div className="containContainContain">
             <div className="containContain">
-            <div className="naslovBijeli"> Author: </div>
-            <div className="contain">
-              <p> {data.Author}</p>
-            </div>
-            </div>
-            <div className="containContain">
            <div className="naslovBijeli"> Naziv slike: </div>
             <div className="contain">
               <p> {data.Name}</p>
+            </div>
+            </div>
+            <div className="containContain">
+            <div className="naslovBijeli"> Author: </div>
+            <div className="contain">
+              <p> {data.Author}</p>
             </div>
             </div>
             
@@ -68,22 +68,18 @@ const OneRow = ({ podaci }) => {
           </div>
         </div>
       ))}
-      <Modal
+       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+		disableAutoFocus={true}
       >
-        <Box sx={modalStyle}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-          <div display="flex" align="center">
+        <Box className="modalBody">
+          
+          <div className="alignCardFlip">
             <CardFlip podaci={slika} />
-          </div>
+            </div>
         </Box>
       </Modal>
     </div>

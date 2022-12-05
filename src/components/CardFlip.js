@@ -1,5 +1,6 @@
 import ReactCardFlip from "react-card-flip";
 import { useState } from "react";
+import LoopIcon from '@mui/icons-material/Loop';
 
 const CardFlip = ({ podaci }) => {
   const [isFlipped, setisFlipped] = useState(true);
@@ -26,6 +27,9 @@ const CardFlip = ({ podaci }) => {
                 <div className="naslovBijeli">Description:</div>
                 <div className="containLarge">{podaci.Description}</div>
               </div>
+              <button className="buttonFlip2"  onClick={() => setisFlipped(!isFlipped)}>
+          <LoopIcon fontSize="large" className="img1size" />
+          </button>
           </div>
         </div>
       </div>
@@ -35,9 +39,12 @@ const CardFlip = ({ podaci }) => {
           className="alignSlikaModal"
             style={{ height: "600px" }}
             alt="pic"
-            onClick={() => setisFlipped(!isFlipped)}
+           
             src={podaci.src}
           />
+          <button className="buttonFlip"  onClick={() => setisFlipped(!isFlipped)}>
+          <LoopIcon fontSize="large" className="img1size" />
+          </button>
         </div>
       </div>
     </ReactCardFlip>
