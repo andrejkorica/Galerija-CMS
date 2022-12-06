@@ -10,6 +10,9 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import React from "react";
 import Button from "@mui/material/Button";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import imageCompression from "browser-image-compression";
 
 function App() {
 	const [podaci, setPodaci] = useState([]);
@@ -38,6 +41,73 @@ function App() {
 		// `current` points to the mounted file input element
 		closeModal.current.click();
 	};
+
+	async function resizeImageFn(event) {
+		const imageFile = event.dataTransfer.files[0];
+		console.log("originalFile instanceof Blob", imageFile instanceof Blob); // true
+		console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+
+		const options = {
+			maxSizeMB: 0.35,
+			maxWidthOrHeight: 1200,
+			useWebWorker: true,
+		};
+		try {
+			const compressedFile = await imageCompression(imageFile, options);
+			console.log(
+				"compressedFile instanceof Blob",
+				compressedFile instanceof Blob
+			); // true
+			console.log(
+				`compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+			); // smaller than maxSizeMB
+			console.log(compressedFile);
+			setSelectedFile(compressedFile);
+			setIsFilePicked(true);
+			const file = compressedFile;
+			getBase64(file).then((base64) => {
+				localStorage["fileBase64"] = base64;
+				setPic(base64);
+				console.log(base64);
+			});
+			changePreview(file); // write your own logic
+		} catch (error) {
+			console.log(error);
+		}
+	}
+	async function resizeImageFnT(event) {
+		const imageFile = event.target.files[0];
+		console.log("originalFile instanceof Blob", imageFile instanceof Blob); // true
+		console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+
+		const options = {
+			maxSizeMB: 0.35,
+			maxWidthOrHeight: 1200,
+			useWebWorker: true,
+		};
+		try {
+			const compressedFile = await imageCompression(imageFile, options);
+			console.log(
+				"compressedFile instanceof Blob",
+				compressedFile instanceof Blob
+			); // true
+			console.log(
+				`compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+			); // smaller than maxSizeMB
+			console.log(compressedFile);
+			setSelectedFile(compressedFile);
+			setIsFilePicked(true);
+			const file = compressedFile;
+			getBase64(file).then((base64) => {
+				localStorage["fileBase64"] = base64;
+				setPic(base64);
+				console.log(base64);
+			});
+			changePreview(file); // write your own logic
+		} catch (error) {
+			console.log(error);
+		}
+	}
 	const handleSubmit = (event) => {
 		// 👇️ prevent page refresh
 		event.preventDefault();
@@ -58,8 +128,20 @@ function App() {
 		localStorage.clear();
 		setPic("");
 		modalClose();
+		notify();
 	};
-
+	const notify = () => {
+		toast.success("🦄 Image submitted sucessfuly", {
+			position: "top-center",
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: "dark",
+		});
+	};
 	const getBase64 = (file) => {
 		return new Promise((resolve, reject) => {
 			console.log("getbase64");
@@ -70,17 +152,6 @@ function App() {
 		});
 	};
 
-	const changeHandler = (e) => {
-		setSelectedFile(e.target.files[0]);
-		setIsFilePicked(true);
-		const file = e.target.files[0];
-		getBase64(file).then((base64) => {
-			localStorage["fileBase64"] = base64;
-			console.log("file stored", base64);
-			setPic(base64);
-		});
-		changePreview(e.target.files[0]);
-	};
 	const changePreview = (s) => {
 		const objectUrl = URL.createObjectURL(s);
 		setPreview(objectUrl);
@@ -97,18 +168,51 @@ function App() {
 	const dragLeave = (e) => {
 		e.preventDefault();
 	};
+	const checkSize = (e) => {
+		console.log(e.target.files[0].size);
+		// 5MB
+		if (e.target.files[0].size > 5242880) return false;
+		else return true;
+	};
+	const checkSizeD = (e) => {
+		console.log(e.dataTransfer.files[0].size);
+		// 5MB
+		if (e.dataTransfer.files[0].size > 5242880) return false;
+		else return true;
+	};
+	const changeHandler = (e) => {
+		if (checkSize(e)) {
+			resizeImageFnT(e);
+		} else {
+			console.log("toast");
+			toast.error("Image size is too big", {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "colored",
+			});
+		}
+	};
 	const fileDrop = (e) => {
 		e.preventDefault();
-		console.log(e.dataTransfer.files[0]);
-		setSelectedFile(e.dataTransfer.files[0]);
-		setIsFilePicked(true);
-		const file = e.dataTransfer.files[0];
-		getBase64(file).then((base64) => {
-			localStorage["fileBase64"] = base64;
-			console.log("file stored", base64);
-			setPic(base64);
-		});
-		changePreview(e.dataTransfer.files[0]);
+		if (checkSizeD(e)) resizeImageFn(e);
+		else {
+			console.log("toast");
+			toast.error("Image size is too big", {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "colored",
+			});
+		}
 	};
 
 	useEffect(() => {
@@ -188,15 +292,16 @@ function App() {
 
 										{isFilePicked && preview ? (
 											<div className="prew">
-												<p>Filename: {selectedFile.name}</p>
-												<p>Filetype: {selectedFile.type}</p>
-												<p>Size in bytes: {selectedFile.size}</p>
-												<p>
-													lastModifiedDate:{" "}
-													{selectedFile.lastModifiedDate.toLocaleDateString()}
-												</p>
-												<img src={preview} alt="preview" />
+												<h2 style={{ textAlign: "center" }}>
+													Preview of {selectedFile.name.substring(0, 60)}
+												</h2>
+												<img
+													className="previewImage"
+													src={preview}
+													alt="preview"
+												/>
 												<Button
+													className="removebtn"
 													onClick={() => {
 														setIsFilePicked(false);
 														localStorage.clear();
@@ -209,7 +314,7 @@ function App() {
 												</Button>
 											</div>
 										) : (
-											<p>Select a file to show details</p>
+											<p>Drag & drop a file or click inside the file box</p>
 										)}
 										{!isFilePicked && (
 											<div className="droparea">
@@ -245,6 +350,7 @@ function App() {
 											{picName && desc && picNum && author && beacon && pic && (
 												<Button
 													style={{ marginTop: "10px" }}
+													className="removebtn"
 													type="submit"
 													variant="contained"
 													color="success"
@@ -252,27 +358,27 @@ function App() {
 													Submit
 												</Button>
 											)}
+											<Button
+												variant="contained"
+												className="removebtn"
+												ref={closeModal}
+												onClick={() => {
+													console.log("modal closed ");
+													close();
+												}}
+											>
+												close
+											</Button>
 										</div>
 									</form>
 								</div>
-								<div className="actions">
-									<Button
-										variant="contained"
-										className="button"
-										ref={closeModal}
-										onClick={() => {
-											console.log("modal closed ");
-											close();
-										}}
-									>
-										close
-									</Button>
-								</div>
+								<div className="actions"></div>
 							</div>
 						)}
 					</Popup>
 				</div>
 			</div>
+			<ToastContainer />
 			{view && podaci && <GalleryV podaci={podaci}></GalleryV>}
 			{!view && podaci && <OneRow podaci={podaci}></OneRow>}
 		</div>
