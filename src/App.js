@@ -1,6 +1,6 @@
 import "./App.css";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import GalleryV from "./components/GalleryV";
 import OneRow from "./components/OneRow";
 import TocIcon from "@mui/icons-material/Toc";
@@ -16,16 +16,33 @@ function App() {
 	const [selectedFile, setSelectedFile] = useState();
 	const [isFilePicked, setIsFilePicked] = useState(false);
 	const [preview, setPreview] = useState();
+	const [picName, setPicName] = useState('');
+	const [desc, setDesc] = useState('');
+	const [picNum, setPicNum] = useState();
+	const [author, setAuthor] = useState('');
+	const [beacon, setBeacon] = useState('');
+	const [pic, setPic] = useState('');
 
+	const inputFile = useRef(null) 
 	const getData = async () => {
 		const podaci = await axios.get(`http://localhost:8000/photos`);
 		setPodaci(podaci.data);
 	};
+	const onInputClick = () => {
+		// `current` points to the mounted file input element
+	   inputFile.current.click();
+	  };
 	const handleSubmit = (event) => {
 		// 👇️ prevent page refresh
 		event.preventDefault();
 
 		console.log("form submitted ✅");
+		console.log("picName", picName);
+		console.log("desc", desc);
+		console.log("picnum", picNum);
+		console.log("author", author);
+		console.log("beacon", beacon);
+		console.log("base64", pic.substring(0,20));
 	};
 
 	const getBase64 = (file) => {
@@ -45,6 +62,7 @@ function App() {
 		getBase64(file).then((base64) => {
 			localStorage["fileBase64"] = base64;
 			console.log("file stored", base64);
+			setPic(base64);
 		});
 		changePreview(e.target.files[0]);
 	};
@@ -75,6 +93,7 @@ function App() {
 		getBase64(file).then((base64) => {
 			localStorage["fileBase64"] = base64;
 			console.log("file stored", base64);
+			setPic(base64)
 		});
 		changePreview(e.dataTransfer.files[0]);
 	};
@@ -116,6 +135,7 @@ function App() {
 											name="ip"
 											id="ip"
 											placeholder="Name of picture.."
+											onChange={event => setPicName(event.target.value)}
 										/>
 										<hr />
 										<textarea
@@ -123,6 +143,7 @@ function App() {
 											id="poruka"
 											rows="5"
 											placeholder="Description of picture..."
+											onChange={event => setDesc(event.target.value)}
 										></textarea>
 
 										<hr />
@@ -131,6 +152,7 @@ function App() {
 											name="num"
 											id="num"
 											placeholder="Num of picture.."
+											onChange={event => setPicNum(event.target.value)}
 										/>
 										<hr />
 										<input
@@ -138,6 +160,7 @@ function App() {
 											name="author"
 											id="author"
 											placeholder="Name of author	.."
+											onChange={event => setAuthor(event.target.value)}
 										/>
 										<hr />
 										<input
@@ -145,7 +168,9 @@ function App() {
 											name="beaconid"
 											id="beaconid"
 											placeholder="Beacon ID...."
+											onChange={event => setBeacon(event.target.value)}
 										/>
+
 										<hr />
 
 										{isFilePicked && preview ? (
@@ -164,9 +189,9 @@ function App() {
 										)}
 										{!isFilePicked && (
 											<div className="droparea">
-												<div className="container">
+												<div className="containerUpload">
 													<div
-														className="drop-container"
+														className="drop-container" onClick={onInputClick}
 														onDragOver={dragOver}
 														onDragEnter={dragEnter}
 														onDragLeave={dragLeave}
@@ -174,15 +199,17 @@ function App() {
 													>
 														<div className="drop-message">
 															<div className="upload-icon"></div>
-															Drag & Drop
+															DRAG & DROP <br></br>
+															OR CLICK IN THE AREA
+															{!isFilePicked && (
+											<input onChange={changeHandler} type='file' id='file' ref={inputFile} style={{display: 'none'}}/>
+										)}
 														</div>
 													</div>
 												</div>
 											</div>
 										)}
-										{!isFilePicked && (
-											<input type="file" name="file" onChange={changeHandler} />
-										)}
+										
 										<div>
 											<button onClick={handleSubmission}>Submit</button>
 										</div>
