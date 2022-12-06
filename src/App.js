@@ -222,16 +222,13 @@ function App() {
 		<div>
 			<div className="slice">
 				<div className="alignTipka2">
-					<button
-						onClick={() => setView(!view)}
-						className="viewTipka glowOnHoverView ripple"
-					>
+					<button onClick={() => setView(!view)} className="viewTipka">
 						{view && <TocIcon fontSize="large" className="img1size" />}
 						{!view && <ViewQuiltIcon className="img2size" fontSize="large" />}
 					</button>
 					<Popup
 						trigger={
-							<button className="dodajTipka glowOnHoverAdd ripple">
+							<button className="dodajTipka">
 								<AddIcon fontSize="large" className="img1size" />
 							</button>
 						}
@@ -379,8 +376,12 @@ function App() {
 				</div>
 			</div>
 			<ToastContainer />
-			{view && podaci && <GalleryV podaci={podaci}></GalleryV>}
-			{!view && podaci && <OneRow podaci={podaci}></OneRow>}
+			{view && podaci && podaci.length > 0 && (
+				<GalleryV podaci={podaci}></GalleryV>
+			)}
+			{!view && podaci && podaci.length > 0 && (
+				<OneRow podaci={podaci}></OneRow>
+			)}
 		</div>
 	);
 }

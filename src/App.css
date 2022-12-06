@@ -114,9 +114,14 @@ body{
 }
 .dodajTipka:hover{
 transform: scale(0.95);
+border: 2px solid rgb(230, 168, 0);
+cursor:pointer;
 }
 .viewTipka:hover{
   transform: scale(0.95);
+  border: 2px solid rgb(230, 168, 0);
+  
+cursor:pointer;
   }
 
 body{
