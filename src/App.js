@@ -377,7 +377,7 @@ function App() {
 			</div>
 			<ToastContainer />
 			{view && podaci && podaci.length > 0 && (
-				<GalleryV podaci={podaci}></GalleryV>
+			<div className="backgroundOfG">	<GalleryV podaci={podaci}></GalleryV> </div>
 			)}
 			{!view && podaci && podaci.length > 0 && (
 				<OneRow podaci={podaci}></OneRow>

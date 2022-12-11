@@ -147,7 +147,6 @@ cursor:pointer;
   width: 100%;
   height: 100px;
   
-  
 }
 .contain{
   display: flex;
@@ -229,27 +228,18 @@ background-color: #1F1A24;
 
 .modalBody {
   position: absolute;
-  height: 40rem;
+  display: block;
   top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
-  min-width: 60%;
-  background-color: #181818;
+  background-color: #1F1A24;
   box-shadow: 24;
   padding: 4rem;
   border: none;
-
-  
   
 }
 
-.positionFlip{
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  height: 15rem;
-  
-}
+
 
 .naslovAlign{
   justify-content: center;
@@ -355,12 +345,14 @@ textarea {
 
 .containLarge{
   display: flex;
-  background: white;
-  width: 800px;
-  height: 370px;
+  background: #332940;
+  color: white;
+  height: inherit;
+  min-height: 10rem;
   border-radius: 2rem;
   margin-top: 15px;
-  padding: 2.5rem;
+  padding: 1rem;
+  padding-left: 2rem;
 }
 
 .containDesc{
@@ -370,7 +362,7 @@ textarea {
   width: 700px;
   margin: auto auto;
   height: 110px;
-  border-radius: 10px;
+  border-radius: 15px;
 
   padding-inline: 30px;
   margin-top: 10px;
@@ -394,14 +386,14 @@ textarea {
 
 .containFlip{
   display: flex;
-  background: white;
+  background: #332940;
+  color: white;
   width: 250px;
-
   height: 40px;
   border-radius: 2rem;
   justify-content: center;
   align-items: center;
-  margin-bottom: 15px;
+ 
 
   
 }
@@ -415,8 +407,7 @@ textarea {
 .buttonFlip{
   position: fixed;
   left: 47.5%;
-
-  top: 95%;
+  bottom: 95%;
   z-index: 99999;
   height: 4rem;
   width: 4rem;
@@ -496,4 +487,23 @@ background: white;
   display:flex !important;
   justify-content: center !important;
   margin: 15px auto !important;
+}
+
+.backgroundOfG{
+  justify-content: center;
+  margin: 0 auto;
+  background-color: #1F1A24;
+  padding: 4rem;
+  padding-top: 2rem;
+
+  width: fit-content;
+  
+}
+
+.positionFlip {
+  padding: 64px;
+}
+
+.containNA{
+  padding: 20px;
 }
