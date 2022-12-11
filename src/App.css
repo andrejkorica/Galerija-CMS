@@ -139,11 +139,13 @@ cursor:pointer;
 
 .containContainContain{
   display: flex;
-  position: relative;
-  top: 30%;
-  transform: translateY(-50%);
+  
+  
+  
 }
 .containContain{
+  
+  margin-top: 1rem;
   width: 100%;
   height: 100px;
   
@@ -217,6 +219,7 @@ text-align: center;
 background-color: rgba(0,0,0,0.5);
 grid-column: 2 / 3; 
 background-color: #1F1A24;
+
 }
 
 .img1size{
@@ -227,7 +230,8 @@ background-color: #1F1A24;
 }
 
 .modalBody {
-  position: absolute;
+  position: fixed;
+
   display: block;
   top: 52%;
   left: 50%;
@@ -238,6 +242,8 @@ background-color: #1F1A24;
   border: none;
   
 }
+
+
 
 
 
@@ -341,18 +347,23 @@ textarea {
 
 .naslovBijeli{
   color: white;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .containLarge{
   display: flex;
   background: #332940;
   color: white;
-  height: inherit;
+  height: 15rem;
+  overflow: auto;
   min-height: 10rem;
+  
   border-radius: 2rem;
   margin-top: 15px;
   padding: 1rem;
   padding-left: 2rem;
+  
 }
 
 .containDesc{
@@ -363,15 +374,16 @@ textarea {
   margin: auto auto;
   height: 110px;
   border-radius: 15px;
-
+  overflow: auto;
   padding-inline: 30px;
   margin-top: 10px;
+  text-align: left;
   
 }
 
 .naslovBijeliDesc{
   color: white;
-  margin-top: 30px;
+
 }
 
 .alignSlikaModal{
@@ -379,7 +391,7 @@ textarea {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
- 
+  
 
   
 }
@@ -406,36 +418,22 @@ textarea {
 
 .buttonFlip{
   position: fixed;
-  left: 47.5%;
-  bottom: 95%;
+  margin: 5% auto;
+  left: 0;
+  right: 0;
+  bottom: 87%;
+  
   z-index: 99999;
   height: 4rem;
   width: 4rem;
   border-radius: 50%;
   padding: 0;
 border: none;
-background: white;
+background: #332940;
+color: white;
 }
-.buttonFlip2{
-  position: fixed;
-  left: 47.5%;
-  top: 240%;
-  z-index: 99999;
-  height: 4rem;
-  width: 4rem;
-  border-radius: 50%;
-  padding: 0;
-border: none;
-background: white;
-}
-.buttonFlip2:hover{
-  transform: scale(0.90);
-  transition: all .2s ease-in-out;
-}
-.buttonFlip2:active{
-  transition: all .05s ease-in-out;
-  transform: scale(1);
-}
+
+
 
 .buttonFlip:hover{
   transform: scale(0.90);
@@ -446,14 +444,31 @@ background: white;
   transform: scale(1);
 }
 
-/* .containerUpload{
-  transform: translateY(-100%);
-} */
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #8f54a0 #ffffff;
+  }
 
-.containerUpload p {
-  color: red;
-  text-align: center;
-}
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #1F1A24;
+    border-radius: 15px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #8f54a0;
+    border-radius: 10px;
+
+  }
+
+
+
 
 .drop-container {
   display: flex;
@@ -482,6 +497,7 @@ background: white;
   display:flex;
   justify-content: center;
   margin: 0 auto;
+  
 }
 .removebtn{
   display:flex !important;
