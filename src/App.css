@@ -140,8 +140,6 @@ cursor:pointer;
 .containContainContain{
   display: flex;
   
-  
-  
 }
 .containContain{
   
@@ -231,7 +229,7 @@ background-color: #1F1A24;
 
 .modalBody {
   position: fixed;
-
+  border: 2px solid black !important;
   display: block;
   top: 52%;
   left: 50%;
@@ -241,6 +239,9 @@ background-color: #1F1A24;
   padding: 4rem;
   border: none;
   
+}
+.modalAdd{
+  overflow: auto;
 }
 
 
@@ -522,4 +523,17 @@ color: white;
 
 .containNA{
   padding: 20px;
+}
+.modalAdd{
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 400;
+background-color: #1F1A24;
+border: 2px solid #000;
+box-shadow: 24;
+padding: 1rem;
+
+color: white;
 }
