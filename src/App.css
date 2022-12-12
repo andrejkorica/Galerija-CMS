@@ -449,7 +449,7 @@ color: white;
   /* Firefox */
   * {
     scrollbar-width: auto;
-    scrollbar-color: #8f54a0 #ffffff;
+    scrollbar-color: #8f54a0;
   }
 
   /* Chrome, Edge, and Safari */
@@ -479,7 +479,26 @@ color: white;
   width: 800px;
   height: 200px;
   border: 4px dashed #4aa1f3;
+  cursor: pointer;
 }
+
+.drop-conteiner-active{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 800px;
+  height: 200px;
+  border: 4px dashed green;
+  cursor: pointer;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .drop-message {
   text-align:center;
   color: #4aa1f3;
@@ -504,6 +523,7 @@ color: white;
   display:flex !important;
   justify-content: center !important;
   margin: 15px auto !important;
+  width: 12rem;
 }
 
 .backgroundOfG{
@@ -533,7 +553,19 @@ width: 400;
 background-color: #1F1A24;
 border: 2px solid #000;
 box-shadow: 24;
-padding: 1rem;
+
 
 color: white;
 }
+
+.textBoxModal {
+  color: white;
+  background-color: #332940;
+  width: 95%;
+}
+
+.content{
+  padding: 4rem !important;
+  max-height: 80vh;
+}
+

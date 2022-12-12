@@ -133,7 +133,7 @@ function App() {
     setIsFilePicked(false);
     localStorage.clear();
     setPic("");
-    modalClose();
+    handleCloseAdd()
     notify();
   };
   const notify = () => {
@@ -147,6 +147,7 @@ function App() {
       progress: undefined,
       theme: "dark",
     });
+
   };
   const getBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -245,10 +246,10 @@ function App() {
               onClose={handleCloseAdd}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
+              className="modalAddBody"
 			  style={{ overflow: 'scroll' }}
             >
               <Box className="modalAdd">
-			  <div className="header">Insert new picture</div>
                 <div className="content">
                   {""}
                   <form onSubmit={handleSubmit}>
@@ -256,6 +257,7 @@ function App() {
                       type="text"
                       name="ip"
                       id="ip"
+                      className="textBoxModal"
                       placeholder="Name of picture.."
                       onChange={(event) => setPicName(event.target.value)}
                     />
@@ -264,6 +266,7 @@ function App() {
                       name="poruka"
                       id="poruka"
                       rows="5"
+                      className="textBoxModal"
                       placeholder="Description of picture..."
                       onChange={(event) => setDesc(event.target.value)}
                     ></textarea>
@@ -273,6 +276,7 @@ function App() {
                       type="number"
                       name="num"
                       id="num"
+                      className="textBoxModal"
                       placeholder="Num of picture.."
                       onChange={(event) => setPicNum(event.target.value)}
                     />
@@ -281,6 +285,7 @@ function App() {
                       type="text"
                       name="author"
                       id="author"
+                      className="textBoxModal"
                       placeholder="Name of author	.."
                       onChange={(event) => setAuthor(event.target.value)}
                     />
@@ -289,6 +294,7 @@ function App() {
                       type="text"
                       name="beaconid"
                       id="beaconid"
+                      className="textBoxModal"
                       placeholder="Beacon ID...."
                       onChange={(event) => setBeacon(event.target.value)}
                     />
@@ -358,6 +364,7 @@ function App() {
                           className="removebtn"
                           type="submit"
                           variant="contained"
+                          
                           color="success"
                         >
                           Submit
@@ -365,6 +372,7 @@ function App() {
                       )}
                      
                     </div>
+                    
                   </form>
                 </div>
                 <div className="actions"></div>
@@ -492,10 +500,11 @@ function App() {
                       {picName && desc && picNum && author && beacon && pic && (
                         <Button
                           style={{ marginTop: "10px" }}
-                          className="removebtn"
+                          className="removebtn submitBtn"
                           type="submit"
                           variant="contained"
                           color="success"
+                         
                         >
                           Submit
                         </Button>
