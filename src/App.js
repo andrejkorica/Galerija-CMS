@@ -258,7 +258,7 @@ function App() {
                       name="ip"
                       id="ip"
                       className="textBoxModal"
-                      placeholder="Name of picture.."
+                      placeholder="Name of picture..."
                       onChange={(event) => setPicName(event.target.value)}
                     />
                     <hr />
@@ -277,7 +277,7 @@ function App() {
                       name="num"
                       id="num"
                       className="textBoxModal"
-                      placeholder="Num of picture.."
+                      placeholder="Num of picture..."
                       onChange={(event) => setPicNum(event.target.value)}
                     />
                     <hr />
@@ -286,7 +286,7 @@ function App() {
                       name="author"
                       id="author"
                       className="textBoxModal"
-                      placeholder="Name of author	.."
+                      placeholder="Name of author..."
                       onChange={(event) => setAuthor(event.target.value)}
                     />
                     <hr />
@@ -401,7 +401,7 @@ function App() {
                       type="text"
                       name="ip"
                       id="ip"
-                      placeholder="Name of picture.."
+                      placeholder="Name of picture..."
                       onChange={(event) => setPicName(event.target.value)}
                     />
                     <hr />
@@ -418,7 +418,7 @@ function App() {
                       type="number"
                       name="num"
                       id="num"
-                      placeholder="Num of picture.."
+                      placeholder="Num of picture..."
                       onChange={(event) => setPicNum(event.target.value)}
                     />
                     <hr />
