@@ -120,16 +120,16 @@ body{
   
 }
 .dodajTipka:hover{
-transform: scale(0.95);
-border: 2px solid #BB86FC;
-cursor:pointer;
-}
-.viewTipka:hover{
   transform: scale(0.95);
-  border: 2px solid #BB86FC;
-  
-cursor:pointer;
+  border: 2px solid crimson;
+  cursor:pointer;
   }
+  .viewTipka:hover{
+    transform: scale(0.95);
+    border: 2px solid crimson;
+  
+  cursor:pointer;
+    }
 
 
 
@@ -155,7 +155,7 @@ cursor:pointer;
 }
 .contain{
   display: flex;
-  background: #776483;
+  background: #44454D;
   color: white;
   width: auto;
   margin: auto auto;
@@ -218,9 +218,8 @@ h1{
 .gridInlineChild2 {
 height: 300px;
 text-align: center;
-background-color: rgba(0,0,0,0.5);
 grid-column: 2 / 3; 
-background-color: #2E2E41;
+background-color: #2E2F37;
 
 }
 
@@ -354,7 +353,7 @@ textarea {
 
 .containLarge{
   display: flex;
-  background: #776483;
+  background: #2c4b5b;
   color: white;
   height: 15rem;
   overflow: auto;
@@ -369,10 +368,10 @@ textarea {
 
 .containDesc{
   display: flex;
-  background: #776483;
+  background: #44454D;
   color: white;
   margin: auto auto;
-  height: 180px;
+  height: 155px;
   overflow: auto;
   padding-inline: 30px;
   text-align: left;
@@ -396,7 +395,7 @@ textarea {
 
 .containFlip{
   display: flex;
-  background: #776483;
+  background: #2c4b5b;
   color: white;
   width: 250px;
   height: 40px;
@@ -427,7 +426,7 @@ textarea {
   border-radius: 50%;
   padding: 0;
 border: none;
-background: #776483;
+background: #2c4b5b;
 color: white;
 }
 
@@ -451,7 +450,7 @@ color: white;
   /* Firefox */
   * {
     scrollbar-width: auto;
-    scrollbar-color: #8f54a0;
+    scrollbar-color: rgb(151, 34, 57);
   }
 
   /* Chrome, Edge, and Safari */
@@ -460,12 +459,12 @@ color: white;
   }
 
   *::-webkit-scrollbar-track {
-    background: #2E2E41;
-    
+    background: #2E2F37;
+
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color: #8f54a0;
+    background-color: crimson;
     border-radius: 10px;
 
   }
@@ -562,7 +561,7 @@ color: white;
 
 .textBoxModal {
   color: white;
-  background-color: #776483;
+  background-color: #516126;
   width: 95%;
 }
 
