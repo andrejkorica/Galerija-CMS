@@ -3,14 +3,23 @@ import * as React from "react";
 import CardFlip from "./CardFlip";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
 import "../App.css";
+import { Create } from "@mui/icons-material";
+import Popup from "reactjs-popup";
+import Forma from "./Forma";
 
 const OneRow = ({ podaci }) => {
 	const [slika, setSlika] = useState([]);
+	const [data1, setData1] = useState([]);
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
-
+	const [hcomponent, setHcomponent] = useState(false);
+	const parentHandleChange = (e) => {
+		console.log(hcomponent, "ttt");
+		setHcomponent(e);
+	};
 	return (
 		<div>
 			{podaci.map((data) => (
@@ -35,6 +44,21 @@ const OneRow = ({ podaci }) => {
 								<div className="naslovBijeli"> Naziv slike: </div>
 								<div className="contain">
 									<p> {data.Name}</p>
+								</div>
+							</div>
+							<div className="containContain">
+								<div className="naslovBijeli">
+									<button
+										className="editButton"
+										onClick={() => {
+											setHcomponent(true);
+											setData1(data);
+											console.log(data.Author);
+										}}
+									>
+										<Create fontSize="xs" />
+										&nbsp;UREDI
+									</button>
 								</div>
 							</div>
 							<div className="containContain">
@@ -66,6 +90,14 @@ const OneRow = ({ podaci }) => {
 					</div>
 				</Box>
 			</Modal>
+			{hcomponent && (
+				<Forma
+					podaci={data1}
+					sendData={(v) => {
+						console.log(v);
+					}}
+				></Forma>
+			)}
 		</div>
 	);
 };
