@@ -95,7 +95,7 @@ body{
 
 .viewTipka{
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  background-color: #2E2E41;
+  background-color: #14151C;
   color: white;
   border:none;
   font-size: 1rem;
@@ -111,7 +111,7 @@ body{
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border:none;
   font-size: 1.2rem;
-  background-color: #2E2E41;
+  background-color: #14151C;
   color: white;
   width: 4rem;
   height: 4rem;
@@ -237,7 +237,7 @@ background-color: #2E2F37;
   top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #2E2E41;
+  background-color: #2E2F37;
   box-shadow: 24;
   padding: 4rem;
   border: none;
@@ -353,7 +353,7 @@ textarea {
 
 .containLarge{
   display: flex;
-  background: #2c4b5b;
+  background: #44454D;
   color: white;
   height: 15rem;
   overflow: auto;
@@ -395,7 +395,7 @@ textarea {
 
 .containFlip{
   display: flex;
-  background: #2c4b5b;
+  background: #44454D;
   color: white;
   width: 250px;
   height: 40px;
@@ -426,7 +426,7 @@ textarea {
   border-radius: 50%;
   padding: 0;
 border: none;
-background: #2c4b5b;
+background: #14151C;
 color: white;
 }
 
@@ -530,7 +530,7 @@ input::-webkit-inner-spin-button {
 .backgroundOfG{
   justify-content: center;
   margin: 0 auto;
-  background-color: #2E2E41;
+  background-color: #2E2F37;
   padding: 4rem;
   padding-top: 2rem;
 
@@ -551,7 +551,7 @@ top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
 width: 400;
-background-color: #2E2E41;
+background-color: #2E2F37;
 border: 2px solid #000;
 box-shadow: 24;
 
@@ -561,7 +561,7 @@ color: white;
 
 .textBoxModal {
   color: white;
-  background-color: #516126;
+  background-color: #44454D;
   width: 95%;
 }
 
