@@ -8,7 +8,7 @@ import { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 import "../App.css";
 
-const Forma = ({ podaci }) => {
+const Forma = ({ data }) => {
 	const [slika, setSlika] = useState([]);
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
@@ -20,11 +20,11 @@ const Forma = ({ podaci }) => {
 		sendBackData();
 	};
 	const sendBackData = () => {
-		podaci.sendData(false);
+		data.sendData(false);
 	};
 
 	const [selectedFile, setSelectedFile] = useState();
-	const [isFilePicked, setIsFilePicked] = useState(false);
+	const [isFilePicked, setIsFilePicked] = useState(true);
 	const [preview, setPreview] = useState();
 	const [picName, setPicName] = useState("");
 	const [desc, setDesc] = useState("");
@@ -213,6 +213,10 @@ const Forma = ({ podaci }) => {
 			});
 		}
 	};
+	useEffect(() => {
+		console.log("moja data", data);
+		setPreview(data.src);
+	}, []);
 
 	return (
 		<div>
@@ -233,6 +237,7 @@ const Forma = ({ podaci }) => {
 								name="ip"
 								id="ip"
 								className="textBoxModal"
+								defaultValue={data.Name}
 								placeholder="Name of picture..."
 								onChange={(event) => setPicName(event.target.value)}
 							/>
@@ -242,6 +247,7 @@ const Forma = ({ podaci }) => {
 								id="poruka"
 								rows="5"
 								className="textBoxModal"
+								defaultValue={data.Description}
 								placeholder="Description of picture..."
 								onChange={(event) => setDesc(event.target.value)}
 							></textarea>
@@ -251,6 +257,7 @@ const Forma = ({ podaci }) => {
 								type="number"
 								name="num"
 								id="num"
+								defaultValue={data.Num}
 								className="textBoxModal"
 								placeholder="Num of picture..."
 								onChange={(event) => setPicNum(event.target.value)}
@@ -261,6 +268,7 @@ const Forma = ({ podaci }) => {
 								name="author"
 								id="author"
 								className="textBoxModal"
+								defaultValue={data.Author}
 								placeholder="Name of author..."
 								onChange={(event) => setAuthor(event.target.value)}
 							/>
@@ -270,6 +278,7 @@ const Forma = ({ podaci }) => {
 								name="beaconid"
 								id="beaconid"
 								className="textBoxModal"
+								defaultValue={data.BeaconID}
 								placeholder="Beacon ID...."
 								onChange={(event) => setBeacon(event.target.value)}
 							/>
@@ -278,9 +287,7 @@ const Forma = ({ podaci }) => {
 
 							{isFilePicked && preview ? (
 								<div className="prew">
-									<h2 style={{ textAlign: "center" }}>
-										Preview of {selectedFile.name.substring(0, 60)}
-									</h2>
+									<h2 style={{ textAlign: "center" }}>Preview of</h2>
 									<img className="previewImage" src={preview} alt="preview" />
 									<Button
 										className="removebtn"

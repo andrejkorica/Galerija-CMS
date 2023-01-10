@@ -46,14 +46,14 @@ const OneRow = ({ podaci }) => {
 									<p> {data.Name}</p>
 								</div>
 							</div>
-							<div className="containContain">
-								<div className="naslovBijeli">
+							<div className="containContai">
+								<div className="naslovbutton">
 									<button
 										className="editButton"
 										onClick={() => {
 											setHcomponent(true);
 											setData1(data);
-											console.log(data.Author);
+											console.log(data);
 										}}
 									>
 										<Create fontSize="xs" />
@@ -62,8 +62,8 @@ const OneRow = ({ podaci }) => {
 								</div>
 							</div>
 							<div className="containContain">
-								<div className="naslovBijeli"> Author: </div>
-								<div className="contain">
+								<div className="naslovBijeli2"> Author: </div>
+								<div className="contain2">
 									<p> {data.Author}</p>
 								</div>
 							</div>
@@ -90,14 +90,7 @@ const OneRow = ({ podaci }) => {
 					</div>
 				</Box>
 			</Modal>
-			{hcomponent && (
-				<Forma
-					podaci={data1}
-					sendData={(v) => {
-						console.log(v);
-					}}
-				></Forma>
-			)}
+			{hcomponent && <Forma data={data1}></Forma>}
 		</div>
 	);
 };
