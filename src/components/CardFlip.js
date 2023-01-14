@@ -11,15 +11,15 @@ const CardFlip = ({ podaci }) => {
       <div className="positionFlip">
         <div className="containContainContain">
           <div className="containNA">
-            <div className="naslovBijeli">title:</div>
+            <div className="naslovBijeliModalLeft">title:</div>
             <div className="containFlip">{podaci.Name}</div>
           </div>
           <div className="containNA">
-            <div className="naslovBijeli">Author:</div>
-            <div className="containFlip">{podaci.Author}</div>
+            <div className="naslovBijeliModalRight">Author:</div>
+            <div className="containFlipLeft">{podaci.Author}</div>
           </div>
         </div>
-        <div className="naslovBijeli">Description:</div>
+        <div className="naslovBijeliModalDesc">Description:</div>
         <div className="containLarge">{podaci.Description}</div>
         <button className="buttonFlip" onClick={() => setisFlipped(!isFlipped)}>
           <LoopIcon fontSize="large" className="img1size" />
