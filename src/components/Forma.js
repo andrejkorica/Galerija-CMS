@@ -8,7 +8,7 @@ import { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 import "../App.css";
 
-const Forma = ({ data }) => {
+const Forma = ({ data, callback }) => {
 	const [slika, setSlika] = useState([]);
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
@@ -20,7 +20,7 @@ const Forma = ({ data }) => {
 		sendBackData();
 	};
 	const sendBackData = () => {
-		data.sendData(false);
+		callback(false);
 	};
 
 	const [selectedFile, setSelectedFile] = useState();
@@ -214,7 +214,7 @@ const Forma = ({ data }) => {
 		}
 	};
 	useEffect(() => {
-		console.log("moja data", data);
+		console.log(data);
 		setPreview(data.src);
 	}, []);
 

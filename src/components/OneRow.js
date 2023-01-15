@@ -16,9 +16,8 @@ const OneRow = ({ podaci }) => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 	const [hcomponent, setHcomponent] = useState(false);
-	const parentHandleChange = (e) => {
-		console.log(hcomponent, "ttt");
-		setHcomponent(e);
+	const revalue = (e) => {
+		setHcomponent(false);
 	};
 	return (
 		<div>
@@ -41,7 +40,7 @@ const OneRow = ({ podaci }) => {
 					<div className="gridInlineChild2">
 						<div className="containContainContain">
 							<div className="containContain">
-								<div className="naslovBijeli"> Naziv slike: </div>
+								<div className="naslovBijeli"> Art name: </div>
 								<div className="contain">
 									<p> {data.Name}</p>
 								</div>
@@ -57,7 +56,7 @@ const OneRow = ({ podaci }) => {
 										}}
 									>
 										<Create fontSize="xs" />
-										&nbsp;UREDI
+										&nbsp;EDIT
 									</button>
 								</div>
 							</div>
@@ -90,7 +89,7 @@ const OneRow = ({ podaci }) => {
 					</div>
 				</Box>
 			</Modal>
-			{hcomponent && <Forma data={data1}></Forma>}
+			{hcomponent && <Forma data={data1} callback={revalue}></Forma>}
 		</div>
 	);
 };
