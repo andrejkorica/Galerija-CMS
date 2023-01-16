@@ -32,9 +32,15 @@ const Forma = ({ data, callback }) => {
 	const [author, setAuthor] = useState("");
 	const [beacon, setBeacon] = useState("");
 	const [pic, setPic] = useState("");
+
+	const [picName1, setPicName1] = useState("");
+	const [desc1, setDesc1] = useState("");
+	const [picNum1, setPicNum1] = useState();
+	const [author1, setAuthor1] = useState("");
+	const [beacon1, setBeacon1] = useState("");
+	const [pic1, setPic1] = useState("");
 	const [openAdd, setOpenAdd] = React.useState(true);
 	const inputFile = useRef(null);
-	const closeModal = useRef(null);
 
 	const onInputClick = () => {
 		// `current` points to the mounted file input element
@@ -216,6 +222,19 @@ const Forma = ({ data, callback }) => {
 	useEffect(() => {
 		console.log(data);
 		setPreview(data.src);
+		setPicName(data.Name);
+		setDesc(data.Description);
+		setPicNum(data.Num);
+		setAuthor(data.Author);
+		setBeacon(data.BeaconID);
+		setPic(data.src);
+
+		setPicName1(data.Name);
+		setDesc1(data.Description);
+		setPicNum1(data.Num);
+		setAuthor1(data.Author);
+		setBeacon1(data.BeaconID);
+		setPic1(data.src);
 	}, []);
 
 	return (
@@ -239,7 +258,9 @@ const Forma = ({ data, callback }) => {
 								className="textBoxModal"
 								defaultValue={data.Name}
 								placeholder="Name of picture..."
-								onChange={(event) => setPicName(event.target.value)}
+								onChange={(event) => {
+									setPicName(event.target.value);
+								}}
 							/>
 							<hr />
 							<textarea
@@ -336,7 +357,12 @@ const Forma = ({ data, callback }) => {
 							)}
 
 							<div>
-								{picName && desc && picNum && author && beacon && pic && (
+								{(picName !== picName1 ||
+									desc !== desc1 ||
+									picNum !== picNum1 ||
+									author !== author1 ||
+									beacon !== beacon1 ||
+									(pic !== pic1 && pic !== "")) && (
 									<Button
 										style={{ marginTop: "10px" }}
 										className="removebtn"
@@ -344,10 +370,11 @@ const Forma = ({ data, callback }) => {
 										variant="contained"
 										color="success"
 									>
-										Submit
+										SUBMIT CHANGES
 									</Button>
 								)}
 							</div>
+							<br />
 						</form>
 					</div>
 					<div className="actions"></div>
