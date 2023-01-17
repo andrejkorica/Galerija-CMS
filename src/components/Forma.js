@@ -28,14 +28,14 @@ const Forma = ({ data, callback }) => {
 	const [preview, setPreview] = useState();
 	const [picName, setPicName] = useState("");
 	const [desc, setDesc] = useState("");
-	const [picNum, setPicNum] = useState();
+	const [picNum, setPicNum] = useState(0);
 	const [author, setAuthor] = useState("");
 	const [beacon, setBeacon] = useState("");
 	const [pic, setPic] = useState("");
 
 	const [picName1, setPicName1] = useState("");
 	const [desc1, setDesc1] = useState("");
-	const [picNum1, setPicNum1] = useState();
+	const [picNum1, setPicNum1] = useState(0);
 	const [author1, setAuthor1] = useState("");
 	const [beacon1, setBeacon1] = useState("");
 	const [pic1, setPic1] = useState("");
@@ -281,7 +281,9 @@ const Forma = ({ data, callback }) => {
 								defaultValue={data.Num}
 								className="textBoxModal"
 								placeholder="Num of picture..."
-								onChange={(event) => setPicNum(event.target.value)}
+								onChange={(event) => {
+									setPicNum(parseInt(event.target.value, 10));
+								}}
 							/>
 							<hr />
 							<input
