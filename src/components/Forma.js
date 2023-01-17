@@ -1,7 +1,7 @@
 import * as React from "react";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import imageCompression from "browser-image-compression";
 import { useState, useEffect, useRef } from "react";
@@ -9,21 +9,13 @@ import Box from "@mui/material/Box";
 import "../App.css";
 
 const Forma = ({ data, callback }) => {
-	const [slika, setSlika] = useState([]);
-	const [open, setOpen] = useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
-
-	const handleOpenAdd = () => setOpenAdd(true);
 	const handleCloseAdd = () => {
-		setOpenAdd(false);
 		sendBackData();
 	};
 	const sendBackData = () => {
 		callback(false);
 	};
 
-	const [selectedFile, setSelectedFile] = useState();
 	const [isFilePicked, setIsFilePicked] = useState(true);
 	const [preview, setPreview] = useState();
 	const [picName, setPicName] = useState("");
@@ -39,7 +31,7 @@ const Forma = ({ data, callback }) => {
 	const [author1, setAuthor1] = useState("");
 	const [beacon1, setBeacon1] = useState("");
 	const [pic1, setPic1] = useState("");
-	const [openAdd, setOpenAdd] = React.useState(true);
+	const [openAdd] = React.useState(true);
 	const inputFile = useRef(null);
 
 	const onInputClick = () => {
@@ -67,13 +59,12 @@ const Forma = ({ data, callback }) => {
 				`compressedFile size ${compressedFile.size / 1024 / 1024} MB`
 			); // smaller than maxSizeMB
 			console.log(compressedFile);
-			setSelectedFile(compressedFile);
 			setIsFilePicked(true);
 			const file = compressedFile;
 			getBase64(file).then((base64) => {
 				localStorage["fileBase64"] = base64;
 				setPic(base64);
-				console.log(base64);
+				// base64 set
 			});
 			changePreview(file); // write your own logic
 		} catch (error) {
@@ -100,13 +91,12 @@ const Forma = ({ data, callback }) => {
 				`compressedFile size ${compressedFile.size / 1024 / 1024} MB`
 			); // smaller than maxSizeMB
 			console.log(compressedFile);
-			setSelectedFile(compressedFile);
 			setIsFilePicked(true);
 			const file = compressedFile;
 			getBase64(file).then((base64) => {
 				localStorage["fileBase64"] = base64;
 				setPic(base64);
-				console.log(base64);
+				// base64 set
 			});
 			changePreview(file); // write your own logic
 		} catch (error) {
@@ -117,13 +107,29 @@ const Forma = ({ data, callback }) => {
 		// 👇️ prevent page refresh
 		event.preventDefault();
 
-		console.log("form submitted ✅");
-		console.log("picName", picName);
-		console.log("desc", desc);
-		console.log("picnum", picNum);
-		console.log("author", author);
-		console.log("beacon", beacon);
-		console.log("base64", pic.substring(0, 20));
+		// Function runs if there are any changes!
+		// Runs if new picture is inserted!
+		if (pic !== pic1 && pic !== "") {
+			// Send everything with pic being base64 pic
+
+			console.log("form submitted with new picture ✅");
+			console.log("picName", picName);
+			console.log("desc", desc);
+			console.log("picnum", picNum);
+			console.log("author", author);
+			console.log("beacon", beacon);
+			console.log("base64", pic.substring(0, 10));
+		} else {
+			// Send everything with pic being pic = "null"
+
+			console.log("form submitted without new picture ✅");
+			console.log("picName", picName);
+			console.log("desc", desc);
+			console.log("picnum", picNum);
+			console.log("author", author);
+			console.log("beacon", beacon);
+		}
+		// Clearing!
 		setPicName("");
 		setDesc("");
 		setPicNum(null);
@@ -160,7 +166,7 @@ const Forma = ({ data, callback }) => {
 	const changePreview = (s) => {
 		const objectUrl = URL.createObjectURL(s);
 		setPreview(objectUrl);
-		console.log(preview);
+		console.log("preview", objectUrl);
 	};
 
 	const dragOver = (e) => {
@@ -181,7 +187,7 @@ const Forma = ({ data, callback }) => {
 	};
 	const checkSizeD = (e) => {
 		console.log(e.dataTransfer.files[0].size);
-		// 5MB
+		// Max picture size 5MB
 		if (e.dataTransfer.files[0].size > 5242880) return false;
 		else return true;
 	};
@@ -235,7 +241,7 @@ const Forma = ({ data, callback }) => {
 		setAuthor1(data.Author);
 		setBeacon1(data.BeaconID);
 		setPic1(data.src);
-	}, []);
+	}, [data]);
 
 	return (
 		<div>
