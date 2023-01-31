@@ -48,6 +48,24 @@ function App() {
     closeModal.current.click();
   };
 
+  async function sendGallery() {
+    try {
+      const res = await axios.post("https://intersoft.uno/crm/M1WebServiceCRM.svc/v1/GalleryInsert", {
+        ImageTitle: picName,
+        ImageAuthor: author,
+        ImageDescription: desc,
+        ImageNum: picNum,
+        ImageBase64: pic.substring(0, 10),
+        
+      });
+      console.log(res);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+
   async function resizeImageFn(event) {
     const imageFile = event.dataTransfer.files[0];
     console.log("originalFile instanceof Blob", imageFile instanceof Blob); // true
@@ -134,6 +152,7 @@ function App() {
     localStorage.clear();
     setPic("");
     handleCloseAdd()
+    sendGallery()
     notify();
   };
   const notify = () => {
@@ -372,7 +391,7 @@ function App() {
                       )}
                      
                     </div>
-                    
+                    <br />
                   </form>
                 </div>
                 <div className="actions"></div>
@@ -542,5 +561,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
