@@ -13,6 +13,13 @@ app.post("/postaj", async (req, res) => {
 	const { ImageTitle, ImageAuthor, ImageDescription, ImageNum, ImageBase64 } =
 		req.body;
 	try {
+		console.log(
+			ImageTitle,
+			ImageAuthor,
+			ImageDescription,
+			ImageNum,
+			ImageBase64
+		);
 		const rez = await axios.post(
 			"https://intersoft.uno/crm/M1WebServiceCRM.svc/v1/GalleryInsert",
 			{
@@ -23,9 +30,9 @@ app.post("/postaj", async (req, res) => {
 				ImageBase64: ImageBase64,
 			}
 		);
-		res.json(rez.data);
+		res.send(rez.data);
 
-		console.log(res);
+		console.log("rez", rez.data);
 	} catch (error) {
 		console.log(error);
 	}
