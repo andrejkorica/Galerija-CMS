@@ -16,7 +16,7 @@ const GalleryV = ({ podaci }) => {
 	const x = 5;
 	const y = 10;
 	useEffect(() => {
-		setBrojac(Math.round(podaci.length / 5));
+		setBrojac(Math.ceil(podaci.length / 5));
 	}, [podaci]);
 
 	return (

@@ -18,6 +18,7 @@ import imageCompression from "browser-image-compression";
 
 function App() {
 	const [podaci, setPodaci] = useState([]);
+	const [podaci2, setPodaci2] = useState([]);
 	const [view, setView] = useState(true);
 	const [selectedFile, setSelectedFile] = useState();
 	const [isFilePicked, setIsFilePicked] = useState(false);
@@ -31,7 +32,6 @@ function App() {
 	const [openAdd, setOpenAdd] = React.useState(false);
 	const handleOpenAdd = () => setOpenAdd(true);
 	const handleCloseAdd = () => setOpenAdd(false);
-
 	const inputFile = useRef(null);
 	const closeModal = useRef(null);
 	const getData = async () => {
@@ -46,7 +46,6 @@ function App() {
 		// `current` points to the mounted file input element
 		closeModal.current.click();
 	};
-
 	async function sendGallery() {
 		try {
 			const res = await axios.post("http://localhost:2000/postaj", {
@@ -54,9 +53,24 @@ function App() {
 				ImageAuthor: author,
 				ImageDescription: desc,
 				ImageNum: picNum,
-				ImageBase64: pic.substring(0, 10),
+				ImageBase64: pic.substring(0, 30),
 			});
-			console.log(res);
+			console.log(res.data);
+			if (res.data.ResponseCode == "0") {
+				let newPodaci = {
+					src: pic,
+					id: res.data.ID,
+					Name: picName,
+					Description: desc,
+					Num: picNum,
+					Author: author,
+					BeaconID: "Beacon",
+				};
+				setPodaci(podaci.concat(newPodaci));
+				console.log(podaci);
+
+				notify();
+			} else notifyError();
 		} catch (error) {
 			console.log(error);
 		}
@@ -68,7 +82,7 @@ function App() {
 		console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
 		const options = {
-			maxSizeMB: 0.35,
+			maxSizeMB: 0.1,
 			maxWidthOrHeight: 1200,
 			useWebWorker: true,
 		};
@@ -101,7 +115,7 @@ function App() {
 		console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
 		const options = {
-			maxSizeMB: 0.35,
+			maxSizeMB: 0.1,
 			maxWidthOrHeight: 1200,
 			useWebWorker: true,
 		};
@@ -131,7 +145,7 @@ function App() {
 	const handleSubmit = (event) => {
 		// 👇️ prevent page refresh
 		event.preventDefault();
-
+		sendGallery();
 		console.log("form submitted ✅");
 		console.log("picName", picName);
 		console.log("desc", desc);
@@ -148,13 +162,23 @@ function App() {
 		localStorage.clear();
 		setPic("");
 		handleCloseAdd();
-		sendGallery();
-		notify();
 	};
 	const notify = () => {
 		toast.success("🦄 Image submitted sucessfuly", {
 			position: "top-center",
 			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: "dark",
+		});
+	};
+	const notifyError = () => {
+		toast.error("🦄 Something went wrong, try again!", {
+			position: "top-center",
+			autoClose: 5000,
 			hideProgressBar: false,
 			closeOnClick: true,
 			pauseOnHover: true,
@@ -239,6 +263,7 @@ function App() {
 	useEffect(() => {
 		getData();
 	}, []);
+
 	return (
 		<div>
 			<div className="slice">
