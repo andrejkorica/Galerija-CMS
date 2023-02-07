@@ -18,7 +18,6 @@ import imageCompression from "browser-image-compression";
 
 function App() {
 	const [podaci, setPodaci] = useState([]);
-	const [podaci2, setPodaci2] = useState([]);
 	const [view, setView] = useState(true);
 	const [selectedFile, setSelectedFile] = useState();
 	const [isFilePicked, setIsFilePicked] = useState(false);
@@ -42,10 +41,6 @@ function App() {
 		// `current` points to the mounted file input element
 		inputFile.current.click();
 	};
-	const modalClose = () => {
-		// `current` points to the mounted file input element
-		closeModal.current.click();
-	};
 	async function sendGallery() {
 		try {
 			const res = await axios.post("http://localhost:2000/postaj", {
@@ -56,7 +51,7 @@ function App() {
 				ImageBase64: pic.substring(0, 30),
 			});
 			console.log(res.data);
-			if (res.data.ResponseCode == "0") {
+			if (res.data.ResponseCode === "0") {
 				let newPodaci = {
 					src: pic,
 					id: res.data.ID,
@@ -82,7 +77,7 @@ function App() {
 		console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
 		const options = {
-			maxSizeMB: 0.1,
+			maxSizeMB: 0.3,
 			maxWidthOrHeight: 1200,
 			useWebWorker: true,
 		};
@@ -115,7 +110,7 @@ function App() {
 		console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
 		const options = {
-			maxSizeMB: 0.1,
+			maxSizeMB: 0.3,
 			maxWidthOrHeight: 1200,
 			useWebWorker: true,
 		};
