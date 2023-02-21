@@ -22,7 +22,7 @@ const OneRow = ({ podaci }) => {
 	return (
 		<div>
 			{podaci.map((data) => (
-				<div className="gridInlineFather" key={data.id}>
+				<div className="gridInlineFather" key={data.ID}>
 					<div className="gridInlineChild1">
 						<Box display="flex" flexDirection="column" alignItems="center">
 							<img
@@ -31,7 +31,7 @@ const OneRow = ({ podaci }) => {
 									handleOpen();
 									setSlika(data);
 								}}
-								src={data.src}
+								src={data.ImgPath}
 								alt="IMG DIDNT LOAD"
 								style={{ marginBottom: "8px" }}
 							/>
@@ -42,7 +42,7 @@ const OneRow = ({ podaci }) => {
 							<div className="containContain">
 								<div className="naslovBijeli"> Art name: </div>
 								<div className="contain">
-									<p> {data.Name}</p>
+									<p> {data.ImageTitle}</p>
 								</div>
 							</div>
 							<div className="containContai">
@@ -63,14 +63,14 @@ const OneRow = ({ podaci }) => {
 							<div className="containContain">
 								<div className="naslovBijeli2"> Author: </div>
 								<div className="contain2">
-									<p> {data.Author}</p>
+									<p> {data.ImageAuthor}</p>
 								</div>
 							</div>
 						</div>
 						<div className="containContain">
 							<div className="naslovBijeliDesc">Description: </div>
 							<div className="containDesc">
-								<p> {data.Description}</p>
+								<p> {data.ImageDescription}</p>
 							</div>
 						</div>
 					</div>

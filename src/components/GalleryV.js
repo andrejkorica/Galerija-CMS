@@ -35,7 +35,7 @@ const GalleryV = ({ podaci }) => {
 										handleOpen();
 										setSlika(person);
 									}}
-									src={person.src}
+									src={person.ImgPath}
 									alt=""
 								/>
 							</div>

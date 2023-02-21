@@ -18,15 +18,15 @@ const CardFlip = ({ podaci }) => {
 				<div className="containContainContain">
 					<div className="containNA">
 						<div className="naslovBijeliModalLeft">title:</div>
-						<div className="containFlip">{podaci.Name}</div>
+						<div className="containFlip">{podaci.ImageTitle}</div>
 					</div>
 					<div className="containNA">
 						<div className="naslovBijeliModalRight">Author:</div>
-						<div className="containFlipLeft">{podaci.Author}</div>
+						<div className="containFlipLeft">{podaci.ImageAuthor}</div>
 					</div>
 				</div>
 				<div className="naslovBijeliModalDesc">Description:</div>
-				<div className="containLarge">{podaci.Description}</div>
+				<div className="containLarge">{podaci.ImageDescription}</div>
 				{/* <button className="buttonFlip" onClick={() => setisFlipped(!isFlipped)}>
           <LoopIcon fontSize="large" className="img1size" />
         </button> */}
@@ -40,7 +40,7 @@ const CardFlip = ({ podaci }) => {
 					className="alignSlikaModal"
 					style={{ height: "600px" }}
 					alt="pic"
-					src={podaci.src}
+					src={podaci.ImgPath}
 				/>
 				<button
 					className="editButton"

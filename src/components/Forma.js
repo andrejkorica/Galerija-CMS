@@ -7,7 +7,7 @@ import imageCompression from "browser-image-compression";
 import { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 import "../App.css";
-
+import axios from "axios";
 const Forma = ({ data, callback }) => {
 	const handleCloseAdd = () => {
 		sendBackData();
@@ -106,12 +106,11 @@ const Forma = ({ data, callback }) => {
 	const handleSubmit = (event) => {
 		// 👇️ prevent page refresh
 		event.preventDefault();
-
+		
 		// Function runs if there are any changes!
 		// Runs if new picture is inserted!
 		if (pic !== pic1 && pic !== "") {
 			// Send everything with pic being base64 pic
-
 			console.log("form submitted with new picture ✅");
 			console.log("picName", picName);
 			console.log("desc", desc);
@@ -119,16 +118,19 @@ const Forma = ({ data, callback }) => {
 			console.log("author", author);
 			console.log("beacon", beacon);
 			console.log("base64", pic.substring(0, 10));
+			apdejtaj()
 		} else {
 			// Send everything with pic being pic = "null"
-
 			console.log("form submitted without new picture ✅");
 			console.log("picName", picName);
 			console.log("desc", desc);
 			console.log("picnum", picNum);
 			console.log("author", author);
 			console.log("beacon", beacon);
+			setPic("")
+			apdejtaj()
 		}
+		
 		// Clearing!
 		setPicName("");
 		setDesc("");
@@ -140,6 +142,7 @@ const Forma = ({ data, callback }) => {
 		setPic("");
 		handleCloseAdd();
 		notify();
+		
 	};
 	const notify = () => {
 		toast.success("🦄 Image submitted sucessfuly", {
@@ -227,22 +230,44 @@ const Forma = ({ data, callback }) => {
 	};
 	useEffect(() => {
 		console.log(data);
-		setPreview(data.src);
-		setPicName(data.Name);
-		setDesc(data.Description);
-		setPicNum(data.Num);
-		setAuthor(data.Author);
+		setPreview(data.ImgPath);
+		setPicName(data.ImageTitle);
+		setDesc(data.ImageDescription);
+		setPicNum(data.ImageNum);
+		setAuthor(data.ImageAuthor);
 		setBeacon(data.BeaconID);
-		setPic(data.src);
+		setPic(data.ImgPath);
 
-		setPicName1(data.Name);
-		setDesc1(data.Description);
-		setPicNum1(data.Num);
-		setAuthor1(data.Author);
+		setPicName1(data.ImageTitle);
+		setDesc1(data.ImageDescription);
+		setPicNum1(data.ImageNum);
+		setAuthor1(data.ImageAuthor);
 		setBeacon1(data.BeaconID);
-		setPic1(data.src);
+		setPic1(data.ImgPath);
 	}, [data]);
 
+	const apdejtaj = async () => {
+		console.log("KURAC", pic)
+		try{
+			
+			const rez = await axios.post(
+				"http://localhost:2000/apdejtaj",
+				{
+					ImageTitle: picName,
+					ImageAuthor: author,
+					ImageDescription: desc,
+					ImageNum: picNum,
+					ImageBase64: pic,
+					BeaconID: beacon,
+					ID: data.ID
+				}
+			);
+			console.log("rez", rez.data);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+	
 	return (
 		<div>
 			<Modal
@@ -262,7 +287,7 @@ const Forma = ({ data, callback }) => {
 								name="ip"
 								id="ip"
 								className="textBoxModal"
-								defaultValue={data.Name}
+								defaultValue={data.ImageTitle}
 								placeholder="Name of picture..."
 								onChange={(event) => {
 									setPicName(event.target.value);
@@ -274,7 +299,7 @@ const Forma = ({ data, callback }) => {
 								id="poruka"
 								rows="5"
 								className="textBoxModal"
-								defaultValue={data.Description}
+								defaultValue={data.ImageDescription}
 								placeholder="Description of picture..."
 								onChange={(event) => setDesc(event.target.value)}
 							></textarea>
@@ -284,7 +309,7 @@ const Forma = ({ data, callback }) => {
 								type="number"
 								name="num"
 								id="num"
-								defaultValue={data.Num}
+								defaultValue={data.ImageNum}
 								className="textBoxModal"
 								placeholder="Num of picture..."
 								onChange={(event) => {
@@ -297,7 +322,7 @@ const Forma = ({ data, callback }) => {
 								name="author"
 								id="author"
 								className="textBoxModal"
-								defaultValue={data.Author}
+								defaultValue={data.ImageAuthor}
 								placeholder="Name of author..."
 								onChange={(event) => setAuthor(event.target.value)}
 							/>
@@ -369,7 +394,8 @@ const Forma = ({ data, callback }) => {
 									desc !== desc1 ||
 									picNum !== picNum1 ||
 									author !== author1 ||
-									beacon !== beacon1 ||
+
+									
 									(pic !== pic1 && pic !== "")) && (
 									<Button
 										style={{ marginTop: "10px" }}
@@ -377,6 +403,7 @@ const Forma = ({ data, callback }) => {
 										type="submit"
 										variant="contained"
 										color="success"
+										
 									>
 										SUBMIT CHANGES
 									</Button>

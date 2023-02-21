@@ -34,8 +34,9 @@ function App() {
 	const inputFile = useRef(null);
 	const closeModal = useRef(null);
 	const getData = async () => {
-		const podaci = await axios.get(`http://localhost:8000/photos`);
-		setPodaci(podaci.data);
+		const podaci = await axios.get(`https://intersoft.uno/crm/M1WebServiceCRM.svc/v1/GallerySelect`);
+		setPodaci(podaci.data.Images);
+		console.log(podaci.data.Images)
 	};
 	const onInputClick = () => {
 		// `current` points to the mounted file input element
@@ -48,7 +49,8 @@ function App() {
 				ImageAuthor: author,
 				ImageDescription: desc,
 				ImageNum: picNum,
-				ImageBase64: pic.substring(0, 30),
+				ImageBase64: pic,
+				BeaconID:  beacon,
 			});
 			console.log(res.data);
 			if (res.data.ResponseCode === "0") {
@@ -59,7 +61,7 @@ function App() {
 					Description: desc,
 					Num: picNum,
 					Author: author,
-					BeaconID: "Beacon",
+					BeaconID: beacon,
 				};
 				setPodaci(podaci.concat(newPodaci));
 				console.log(podaci);
@@ -157,6 +159,8 @@ function App() {
 		localStorage.clear();
 		setPic("");
 		handleCloseAdd();
+
+
 	};
 	const notify = () => {
 		toast.success("🦄 Image submitted sucessfuly", {
@@ -392,7 +396,7 @@ function App() {
 										)}
 
 										<div>
-											{picName && desc && picNum && author && beacon && pic && (
+											{picName && desc && picNum && author && pic && (
 												<Button
 													style={{ marginTop: "10px" }}
 													className="removebtn"
