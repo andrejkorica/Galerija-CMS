@@ -8,7 +8,10 @@ import { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 import "../App.css";
 import axios from "axios";
-const Forma = ({ data, callback }) => {
+const Forma = ({ data, callback, refresh }) => {
+	const handleRefresh = () => {
+		refresh(true);
+	};
 	const handleCloseAdd = () => {
 		sendBackData();
 	};
@@ -106,7 +109,7 @@ const Forma = ({ data, callback }) => {
 	const handleSubmit = (event) => {
 		// 👇️ prevent page refresh
 		event.preventDefault();
-		
+
 		// Function runs if there are any changes!
 		// Runs if new picture is inserted!
 		if (pic !== pic1 && pic !== "") {
@@ -118,7 +121,7 @@ const Forma = ({ data, callback }) => {
 			console.log("author", author);
 			console.log("beacon", beacon);
 			console.log("base64", pic.substring(0, 10));
-			apdejtaj()
+			apdejtaj();
 		} else {
 			// Send everything with pic being pic = "null"
 			console.log("form submitted without new picture ✅");
@@ -127,10 +130,10 @@ const Forma = ({ data, callback }) => {
 			console.log("picnum", picNum);
 			console.log("author", author);
 			console.log("beacon", beacon);
-			setPic("")
-			apdejtaj()
+			setPic("");
+			apdejtaj();
 		}
-		
+
 		// Clearing!
 		setPicName("");
 		setDesc("");
@@ -142,7 +145,6 @@ const Forma = ({ data, callback }) => {
 		setPic("");
 		handleCloseAdd();
 		notify();
-		
 	};
 	const notify = () => {
 		toast.success("🦄 Image submitted sucessfuly", {
@@ -245,29 +247,47 @@ const Forma = ({ data, callback }) => {
 		setBeacon1(data.BeaconID);
 		setPic1(data.ImgPath);
 	}, [data]);
-
-	const apdejtaj = async () => {
-		console.log("KURAC", pic)
-		try{
-			
-			const rez = await axios.post(
-				"http://localhost:2000/apdejtaj",
-				{
-					ImageTitle: picName,
-					ImageAuthor: author,
-					ImageDescription: desc,
-					ImageNum: picNum,
-					ImageBase64: pic,
-					BeaconID: beacon,
-					ID: data.ID
-				}
-			);
+	const deletePicture = async () => {
+		try {
+			const rez = await axios.post("http://localhost:2000/delete", {
+				ID: data.ID,
+			});
 			console.log("rez", rez.data);
+
+			handleCloseAdd();
+			handleRefresh();
 		} catch (error) {
 			console.log(error);
 		}
-	}
-	
+	};
+	const apdejtaj = async () => {
+		let x = "";
+		if (pic === pic1) {
+			x = "";
+		} else {
+			let base64String = pic;
+			let commaIndex = base64String.indexOf(",");
+			let base64data = base64String.substring(commaIndex + 1);
+			x = base64data;
+		}
+		try {
+			const rez = await axios.post("http://localhost:2000/apdejtaj", {
+				ImageTitle: picName,
+				ImageAuthor: author,
+				ImageDescription: desc,
+				ImageNum: picNum,
+				ImageBase64: x,
+				BeaconID: beacon,
+				ID: data.ID,
+			});
+			console.log("rez", rez.data);
+			handleCloseAdd();
+			handleRefresh();
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<div>
 			<Modal
@@ -394,8 +414,6 @@ const Forma = ({ data, callback }) => {
 									desc !== desc1 ||
 									picNum !== picNum1 ||
 									author !== author1 ||
-
-									
 									(pic !== pic1 && pic !== "")) && (
 									<Button
 										style={{ marginTop: "10px" }}
@@ -403,11 +421,20 @@ const Forma = ({ data, callback }) => {
 										type="submit"
 										variant="contained"
 										color="success"
-										
 									>
 										SUBMIT CHANGES
 									</Button>
 								)}
+								<Button
+									style={{ marginTop: "10px" }}
+									className="removebtn"
+									type="button"
+									onClick={deletePicture}
+									variant="contained"
+									color="error"
+								>
+									DELETE
+								</Button>
 							</div>
 							<br />
 						</form>

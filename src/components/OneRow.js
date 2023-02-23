@@ -9,7 +9,7 @@ import { Create } from "@mui/icons-material";
 import Popup from "reactjs-popup";
 import Forma from "./Forma";
 
-const OneRow = ({ podaci }) => {
+const OneRow = ({ podaci, prop }) => {
 	const [slika, setSlika] = useState([]);
 	const [data1, setData1] = useState([]);
 	const [open, setOpen] = useState(false);
@@ -18,6 +18,8 @@ const OneRow = ({ podaci }) => {
 	const [hcomponent, setHcomponent] = useState(false);
 	const revalue = (e) => {
 		setHcomponent(false);
+		prop(true);
+		handleClose();
 	};
 	return (
 		<div>
@@ -85,11 +87,13 @@ const OneRow = ({ podaci }) => {
 			>
 				<Box className="modalBody">
 					<div className="alignCardFlip">
-						<CardFlip podaci={slika} />
+						<CardFlip podaci={slika} callback={revalue} />
 					</div>
 				</Box>
 			</Modal>
-			{hcomponent && <Forma data={data1} callback={revalue}></Forma>}
+			{hcomponent && (
+				<Forma data={data1} callback={revalue} refresh={revalue}></Forma>
+			)}
 		</div>
 	);
 };

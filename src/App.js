@@ -33,34 +33,57 @@ function App() {
 	const handleCloseAdd = () => setOpenAdd(false);
 	const inputFile = useRef(null);
 	const closeModal = useRef(null);
+	const refreshStuff = () => {
+		getData();
+	};
 	const getData = async () => {
-		const podaci = await axios.get(`https://intersoft.uno/crm/M1WebServiceCRM.svc/v1/GallerySelect`);
-		setPodaci(podaci.data.Images);
-		console.log(podaci.data.Images)
+		const podaci = await axios.get(
+			`https://intersoft.uno/crm/M1WebServiceCRM.svc/v1/GallerySelect`
+		);
+
+		// Sortiranje
+		const sortedPodaci = podaci.data.Images.sort((a, b) => {
+			const imgNumA = parseInt(a.ImageNum);
+			const imgNumB = parseInt(b.ImageNum);
+
+			if (imgNumA < imgNumB) {
+				return -1;
+			}
+			if (imgNumA > imgNumB) {
+				return 1;
+			}
+			return 0;
+		});
+
+		setPodaci(sortedPodaci);
 	};
 	const onInputClick = () => {
 		// `current` points to the mounted file input element
 		inputFile.current.click();
 	};
 	async function sendGallery() {
+		let base64String = pic;
+		let commaIndex = base64String.indexOf(",");
+		let base64data = base64String.substring(commaIndex + 1);
+		console.log("xxx", base64data);
 		try {
 			const res = await axios.post("http://localhost:2000/postaj", {
 				ImageTitle: picName,
 				ImageAuthor: author,
 				ImageDescription: desc,
 				ImageNum: picNum,
-				ImageBase64: pic,
-				BeaconID:  beacon,
+				ImageBase64: base64data,
+				BeaconID: beacon,
 			});
 			console.log(res.data);
 			if (res.data.ResponseCode === "0") {
 				let newPodaci = {
-					src: pic,
-					id: res.data.ID,
-					Name: picName,
-					Description: desc,
-					Num: picNum,
-					Author: author,
+					ImgPath: pic,
+					ID: res.data.ID,
+					ImageTitle: picName,
+					ImageDescription: desc,
+					ImageNum: picNum,
+					ImageAuthor: author,
 					BeaconID: beacon,
 				};
 				setPodaci(podaci.concat(newPodaci));
@@ -79,7 +102,7 @@ function App() {
 		console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
 		const options = {
-			maxSizeMB: 0.3,
+			maxSizeMB: 0.35,
 			maxWidthOrHeight: 1200,
 			useWebWorker: true,
 		};
@@ -112,7 +135,7 @@ function App() {
 		console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
 		const options = {
-			maxSizeMB: 0.3,
+			maxSizeMB: 0.35,
 			maxWidthOrHeight: 1200,
 			useWebWorker: true,
 		};
@@ -159,8 +182,6 @@ function App() {
 		localStorage.clear();
 		setPic("");
 		handleCloseAdd();
-
-
 	};
 	const notify = () => {
 		toast.success("🦄 Image submitted sucessfuly", {
@@ -563,11 +584,11 @@ function App() {
 			{view && podaci && podaci.length > 0 && (
 				<div className="backgroundOfG">
 					{" "}
-					<GalleryV podaci={podaci}></GalleryV>{" "}
+					<GalleryV podaci={podaci} prop={refreshStuff}></GalleryV>{" "}
 				</div>
 			)}
 			{!view && podaci && podaci.length > 0 && (
-				<OneRow podaci={podaci}></OneRow>
+				<OneRow podaci={podaci} prop={refreshStuff}></OneRow>
 			)}
 		</div>
 	);

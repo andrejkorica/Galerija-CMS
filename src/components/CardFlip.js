@@ -4,10 +4,13 @@ import LoopIcon from "@mui/icons-material/Loop";
 import "../App.css";
 import { Create } from "@mui/icons-material";
 import Forma from "./Forma";
-const CardFlip = ({ podaci }) => {
+const CardFlip = ({ podaci, callback }) => {
 	const [isFlipped, setisFlipped] = useState(true);
 	const [hcomponent, setHcomponent] = useState(false);
 	console.log(podaci);
+	const val = (e) => {
+		callback(true);
+	};
 	const revalue = (e) => {
 		setHcomponent(false);
 	};
@@ -42,10 +45,10 @@ const CardFlip = ({ podaci }) => {
 					alt="pic"
 					src={podaci.ImgPath}
 				/>
+				&nbsp;
 				<button
 					className="editButton"
 					style={{
-						margin: "0",
 						marginTop: "8px",
 						marginBottom: "-40px",
 						margin: "0 auto",
@@ -60,7 +63,9 @@ const CardFlip = ({ podaci }) => {
 					<Create fontSize="xs" />
 					&nbsp;EDIT
 				</button>
-				{hcomponent && <Forma data={podaci} callback={revalue}></Forma>}
+				{hcomponent && (
+					<Forma data={podaci} callback={revalue} refresh={val}></Forma>
+				)}
 			</div>
 		</ReactCardFlip>
 	);

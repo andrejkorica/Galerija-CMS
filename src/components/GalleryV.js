@@ -7,11 +7,15 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import "../App.css";
 
-const GalleryV = ({ podaci }) => {
+const GalleryV = ({ podaci, prop }) => {
 	const [open, setOpen] = useState(false);
 	const [slika, setSlika] = useState([]);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
+	const refresh = (e) => {
+		prop(true);
+		handleClose();
+	};
 	const [brojac, setBrojac] = useState(0);
 	const x = 5;
 	const y = 10;
@@ -29,7 +33,7 @@ const GalleryV = ({ podaci }) => {
 					{podaci
 						.slice(x * (index + 1) - 5, y * (index + 1) - (index + 1) * 5)
 						.map((person) => (
-							<div key={person.id}>
+							<div key={person.ID}>
 								<img
 									onClick={() => {
 										handleOpen();
@@ -51,7 +55,7 @@ const GalleryV = ({ podaci }) => {
 			>
 				<Box className="modalBody">
 					<div className="alignCardFlip">
-						<CardFlip podaci={slika} />
+						<CardFlip podaci={slika} callback={refresh} />
 					</div>
 				</Box>
 			</Modal>
