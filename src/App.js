@@ -49,8 +49,11 @@ function App() {
 	};
 	const localDelete = async (e) => {
 		let x = await findIndex(e);
-		console.log("found index", x);
-		const newArr = podaci.filter((e) => e.ID !== x);
+		console.log("wiiiuuuu", podaci);
+		console.log("found index delete", x);
+		console.log("e", e);
+		let newArr = podaci.filter((obj) => obj.ID !== e.ID);
+		console.log("newarray", newArr);
 		sortData(newArr);
 	};
 	const localUpdate = async (e) => {
@@ -79,7 +82,7 @@ function App() {
 			return 0;
 		});
 		setPodaci(sortedPodaci);
-		console.log(sortedPodaci);
+		console.log("sorted", sortedPodaci);
 	};
 
 	const getData = async () => {

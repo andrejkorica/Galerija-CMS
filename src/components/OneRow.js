@@ -3,10 +3,8 @@ import * as React from "react";
 import CardFlip from "./CardFlip";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
 import "../App.css";
 import { Create } from "@mui/icons-material";
-import Popup from "reactjs-popup";
 import Forma from "./Forma";
 
 const OneRow = ({ podaci, prop }) => {
