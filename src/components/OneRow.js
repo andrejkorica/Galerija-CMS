@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as React from "react";
 import CardFlip from "./CardFlip";
 import Box from "@mui/material/Box";
@@ -16,9 +16,10 @@ const OneRow = ({ podaci, prop }) => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 	const [hcomponent, setHcomponent] = useState(false);
+	const reval = () => console.log("");
 	const revalue = (e) => {
 		setHcomponent(false);
-		prop(true);
+		prop(e);
 		handleClose();
 	};
 	return (
@@ -92,7 +93,7 @@ const OneRow = ({ podaci, prop }) => {
 				</Box>
 			</Modal>
 			{hcomponent && (
-				<Forma data={data1} callback={revalue} refresh={revalue}></Forma>
+				<Forma data={data1} callback={reval} refresh={revalue}></Forma>
 			)}
 		</div>
 	);

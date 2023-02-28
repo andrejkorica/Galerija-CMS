@@ -33,16 +33,40 @@ function App() {
 	const handleCloseAdd = () => setOpenAdd(false);
 	const inputFile = useRef(null);
 	const closeModal = useRef(null);
-	const refreshStuff = () => {
-		getData();
+	const refreshStuff = (e) => {
+		console.log("app", e);
+		console.log("app", Object.keys(e).length);
+		if (Object.keys(e).length > 1) localUpdate(e);
+		else localDelete(e);
 	};
-	const getData = async () => {
-		const podaci = await axios.get(
-			`https://intersoft.uno/crm/M1WebServiceCRM.svc/v1/GallerySelect`
-		);
-
-		// Sortiranje
-		const sortedPodaci = podaci.data.Images.sort((a, b) => {
+	const findIndex = async (e) => {
+		for (let i = 0; i < podaci.length; i++) {
+			if (podaci[i].ID === e.ID) {
+				return i;
+			}
+		}
+		return undefined;
+	};
+	const localDelete = async (e) => {
+		let x = await findIndex(e);
+		console.log("found index", x);
+		const newArr = podaci.filter((e) => e.ID !== x);
+		sortData(newArr);
+	};
+	const localUpdate = async (e) => {
+		let x = await findIndex(e);
+		podaci[x].ImageAuthor = e.ImageAuthor;
+		podaci[x].ImageDescription = e.ImageDescription;
+		podaci[x].ImageNum = e.ImageNum;
+		podaci[x].BeaconID = e.BeaconID;
+		podaci[x].ImageTitle = e.ImageTitle;
+		if (e.ImageBase64 !== "") {
+			podaci[x].ImgPath = e.ImageBase64;
+		}
+		sortData(podaci);
+	};
+	const sortData = async (data) => {
+		const sortedPodaci = data.sort((a, b) => {
 			const imgNumA = parseInt(a.ImageNum);
 			const imgNumB = parseInt(b.ImageNum);
 
@@ -54,8 +78,17 @@ function App() {
 			}
 			return 0;
 		});
-
 		setPodaci(sortedPodaci);
+		console.log(sortedPodaci);
+	};
+
+	const getData = async () => {
+		const podaci = await axios.get(
+			`https://intersoft.uno/crm/M1WebServiceCRM.svc/v1/GallerySelect`
+		);
+
+		// Sortiranje
+		sortData(podaci.data.Images);
 	};
 	const onInputClick = () => {
 		// `current` points to the mounted file input element
@@ -65,6 +98,7 @@ function App() {
 		let base64String = pic;
 		let commaIndex = base64String.indexOf(",");
 		let base64data = base64String.substring(commaIndex + 1);
+		let unsortedData = [];
 		console.log("xxx", base64data);
 		try {
 			const res = await axios.post("http://localhost:2000/postaj", {
@@ -86,7 +120,8 @@ function App() {
 					ImageAuthor: author,
 					BeaconID: beacon,
 				};
-				setPodaci(podaci.concat(newPodaci));
+				unsortedData = podaci.concat(newPodaci);
+				sortData(unsortedData);
 				console.log(podaci);
 
 				notify();
