@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import * as React from "react";
 import CardFlip from "./CardFlip";
 import Box from "@mui/material/Box";
@@ -7,8 +7,7 @@ import "../App.css";
 import { Create } from "@mui/icons-material";
 import Forma from "./Forma";
 
-const OneRow = ({ podaci, prop }) => {
-	const myButtonRef = useRef(null);
+const OneRow = ({ podaci, prop, loadin }) => {
 	const [slika, setSlika] = useState([]);
 	const [data1, setData1] = useState([]);
 	const [rowData, setData] = useState([]);
@@ -19,15 +18,14 @@ const OneRow = ({ podaci, prop }) => {
 	const reval = () => {
 		setHcomponent(false);
 	};
+	const load = () =>{
+		loadin(true);
+		handleClose();
+		setHcomponent(false);
+	}
 	const revalue = async (e) => {
 		setHcomponent(false);
 		await prop(e);
-		handleClose();
-		refreshData();
-	};
-	const refreshData = () => {
-		const refButton = myButtonRef.current;
-		refButton.click();
 	};
 	useEffect(() => {
 		setData(podaci);
@@ -76,14 +74,6 @@ const OneRow = ({ podaci, prop }) => {
 								<div className="naslovBijeli2"> Author: </div>
 								<div className="contain2">
 									<p> {data.ImageAuthor}</p>
-									<button
-										id="refButton"
-										ref={myButtonRef}
-										hidden
-										onClick={() => {
-											setData1(data);
-										}}
-									></button>
 								</div>
 							</div>
 						</div>
@@ -106,12 +96,12 @@ const OneRow = ({ podaci, prop }) => {
 			>
 				<Box className="modalBody">
 					<div className="alignCardFlip">
-						<CardFlip podaci={slika} callback={revalue} />
+						<CardFlip podaci={slika} callback={revalue} load={load} />
 					</div>
 				</Box>
 			</Modal>
 			{hcomponent && (
-				<Forma data={data1} callback={reval} refresh={revalue}></Forma>
+				<Forma data={data1} callback={reval} refresh={revalue} loadin={load}></Forma>
 			)}
 		</div>
 	);
